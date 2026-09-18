@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News - DUA SABA IMPEX PLASTIC MACHINERY</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Vertical Floating 'GO BACK TOP' Button Styling */
+    .vertical-back-top {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* ================= SIDEBAR ================= */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      display: none;
+    }
+    .sidebar-overlay.active { display: block; }
+    .sidebar {
+      position: fixed;
+      top: 0; left: -300px;
+      width: 300px; height: 100vh;
+      background: #0b1320;
+      color: #fff;
+      z-index: 999;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar.active { left: 0; }
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .sidebar-logo { display: flex; align-items: center; gap: 10px; }
+    .sidebar-brand { font-size: 13px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+    .sidebar-close { color: #fff; font-size: 20px; cursor: pointer; }
+    .sidebar-menu { list-style: none; padding: 10px 0; flex-grow: 1; }
+    .sidebar-menu li { border-bottom: 1px solid #1e293b; }
+    .sidebar-menu a,
+    .menu-item-with-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .sidebar-menu a:hover,
+    .menu-item-with-btn:hover { color: #38bdf8; }
+    .dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px; height: 24px;
+      background: #0284c7;
+      color: #fff;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .dropdown-btn.open {
+      transform: rotate(90deg);
+      background: #ffffff;
+      color: #0284c7;
+    }
+    .product-dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #070d19;
+    }
+    .product-dropdown.open { max-height: 400px; }
+    .product-dropdown a {
+      padding: 12px 20px 12px 30px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      border-bottom: 1px solid #151f30;
+      text-transform: uppercase;
+    }
+    .sidebar-contact { padding: 16px 20px; border-top: 1px solid #1e293b; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+    .contact-icon {
+      width: 30px; height: 30px;
+      background: #0284c7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .sidebar-social {
+      display: flex;
+      gap: 16px;
+      padding: 16px 20px;
+      border-top: 1px solid #1e293b;
+      font-size: 18px;
+    }
+    .sidebar-social a { color: #cbd5e1; text-decoration: none; }
+    .sidebar-social a:hover { color: #38bdf8; }
+  </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-100 antialiased relative">
+
+<!-- ================= SIDEBAR OVERLAY ================= -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- ================= SIDEBAR MENU ================= -->
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <img src="logo-icon.png" alt="Dua Saba Impex Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #fff;">
+      <span class="sidebar-brand">DUA SABA IMPEX</span>
+    </div>
+    <div class="sidebar-close" onclick="toggleSidebar()">✕</div>
+  </div>
+
+  <ul class="sidebar-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About us</a></li>
+    <li class="has-dropdown">
+      <div class="menu-item-with-btn" onclick="toggleProductDropdown()">
+        <span>Product</span>
+        <span class="dropdown-btn">›</span>
+      </div>
+       <div id="productDropdown" class="product-dropdown">
+        <a href="product1.html">FULLY AUTOMATIC BLOWING MACHINE</a>
+        <a href="semi-automatic-blowing-macine.html">SEMI AUTOMATIC BLOWING MACHINE</a>
+        <a href="Pet-bottle-.html">BOTTLE MOLD & PREFORM MOLD & CAP MOLD</a>
+        <a href="pet-blowing-axillary-equipments.html">BLOWING MACHINE AUXILIARY EQUIPMENTS</a>
+        <a href="product-detail1.html?product=5">PREFORM & CAP & HANDLE</a>
+      </div>
+    </li>
+    <li><a href="application.html">Application</a></li>
+    <li><a href="video.html">Video</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="sidebar-contact">
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+      <span>sabaplastic007@yahoo.com</span>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+      <span>+92 300 9228618</span>
+    </div>
+  </div>
+
+  <div class="sidebar-social">
+    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+  </div>
+</div>
+
+<!-- ================= NAVBAR ================= -->
+<header class="w-full bg-white shadow-sm sticky top-0 z-40 border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+    <a href="index.html" class="flex items-center space-x-3">
+      <img src="logo-icon.png" alt="DUA SABA Impex Logo" class="h-12 sm:h-14 w-auto object-contain rounded-full border-2 border-gray-200">
+      <span class="text-xl sm:text-2xl font-extrabold italic tracking-wider text-blue-900">
+        DUA SABA IMPEX PLASTIC MACHINERY
+      </span>
+    </a>
+    <button id="openNav" onclick="toggleSidebar()" class="text-2xl text-blue-500 focus:outline-none">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+</header>
+
+<!-- ================= FLOATING GO BACK TOP ================= -->
+<button id="backToTop" class="fixed right-2 bottom-6 z-50 flex flex-col items-center space-y-1 text-xs font-bold tracking-widest text-sky-500 uppercase focus:outline-none hover:text-sky-600 transition">
+  <span class="vertical-back-top">GO BACK TOP</span>
+  <span class="w-1.5 h-8 bg-sky-500 inline-block rounded-full"></span>
+</button>
+
+<!-- ================= HERO BANNER ================= -->
+<section class="relative w-full shadow-2xl overflow-hidden bg-slate-900">
+  <div class="relative w-full h-80 sm:h-96 md:h-[450px]">
+    <img src="about-v3-img1.jpg" alt="DUA SABA IMPEX News Banner" class="w-full h-full object-cover opacity-80">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-950/90 via-sky-950/75 to-black/50"></div>
+  </div>
+
+  <div class="absolute inset-0 flex flex-col justify-center max-w-5xl mx-auto px-6 z-10 text-white space-y-4">
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-xl leading-tight">
+      DUA SABA IMPEX PLASTIC MACHINERY
+    </h1>
+    <p class="text-sm sm:text-lg text-gray-200 font-medium drop-shadow-md">
+      Your Location: <a href="index.html" class="hover:underline">Home</a> &nbsp;&raquo;&nbsp; <span class="font-semibold text-white">News</span>
+    </p>
+  </div>
+</section>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="max-w-5xl mx-auto px-4 py-16">
+  <div class="space-y-16">
+
+    <section class="space-y-16">
+
+      <!-- ===== کارڈ 1 ===== -->
+      <article id="post-1" class="post-card bg-white rounded-xl shadow-md overflow-hidden p-6 sm:p-10 space-y-6 border border-gray-200">
+        <a href="javascript:void(0)" onclick="openPostDetail(1)" class="block overflow-hidden rounded-lg group">
+          <img src="202412301043325965.jpg" alt="Cheap China Quality Mineral Water Bottle Blow Molding Machine" class="w-full h-56 sm:h-80 md:h-96 object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://via.placeholder.com/800x500/0284c7/ffffff?text=Blow+Molding+Machine'">
+        </a>
+        <div class="flex items-center space-x-6 text-sm text-sky-500 font-semibold pt-2">
+          <span class="flex items-center space-x-2"><i class="fa-regular fa-calendar-check text-base"></i> <span>2024/12/30</span></span>
+          <span class="flex items-center space-x-2"><i class="fa-regular fa-user text-base"></i> <span>Admin</span></span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug hover:text-sky-500 transition">
+          <a href="javascript:void(0)" onclick="openPostDetail(1)">
+            Cheap China Quality Mineral Water Bottle Blow Molding Machine
+          </a>
+        </h2>
+        <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+          DUA SABA IMPEX can produce various shapes and sizes of plastic bottles and containers...
+        </p>
+        <div class="pt-2">
+          <a href="javascript:void(0)" onclick="openPostDetail(1)" class="inline-flex items-center space-x-3 bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm px-8 py-4 rounded-lg shadow-md transition uppercase tracking-wider">
+            <span>READ MORE</span>
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- ===== کارڈ 2 ===== -->
+      <article id="post-2" class="post-card bg-white rounded-xl shadow-md p-6 sm:p-10 space-y-6 border border-gray-200">
+        <div class="flex items-center space-x-6 text-sm text-sky-500 font-semibold">
+          <span class="flex items-center space-x-2"><i class="fa-regular fa-calendar-check text-base"></i> <span>2024/12/27</span></span>
+          <span class="flex items-center space-x-2"><i class="fa-regular fa-user text-base"></i> <span>Admin</span></span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug hover:text-sky-500 transition">
+          <a href="javascript:void(0)" onclick="openPostDetail(2)">
+            2 cavity 2L 5L full automatic water bottle blowing machines
+          </a>
+        </h2>
+        <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+          5L blow molding machine adopts human-computer interface...
+        </p>
+        <div class="pt-2">
+          <a href="javascript:void(0)" onclick="openPostDetail(2)" class="inline-flex items-center space-x-3 bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm px-8 py-4 rounded-lg shadow-md transition uppercase tracking-wider">
+            <span>READ MORE</span>
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- ===== کارڈ 3 ===== -->
+      <article id="post-3" class="post-card bg-white rounded-xl shadow-md overflow-hidden p-6 sm:p-10 space-y-6 border border-gray-200">
+        <a href="javascript:void(0)" onclick="openPostDetail(3)" class="block overflow-hidden rounded-lg group">
+          <img src="pet-blowing-machines1.jpg" alt="PET Bottle Blowing Machines" class="w-full h-56 sm:h-80 md:h-96 object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://via.placeholder.com/800x500/334155/ffffff?text=PET+Bottle+Blowing+Machines'">
+        </a>
+        <div class="flex items-center space-x-6 text-sm text-sky-500 font-semibold pt-2">
+          <span class="flex items-center space-x-2"><i class="fa-regular fa-calendar-check text-base"></i> <span>2024/12/27</span></span>
+          <span class="flex items-center space-x-2"><i class="fa-regular fa-user text-base"></i> <span>Admin</span></span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug hover:text-sky-500 transition">
+          <a href="javascript:void(0)" onclick="openPostDetail(3)">
+            PET Bottle Blowing Machines - High-Speed &amp; Efficient
+          </a>
+        </h2>
+        <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+          1.How to operate the bottle blowing machine?...
+        </p>
+        <div class="pt-2">
+          <a href="javascript:void(0)" onclick="openPostDetail(3)" class="inline-flex items-center space-x-3 bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm px-8 py-4 rounded-lg shadow-md transition uppercase tracking-wider">
+            <span>READ MORE</span>
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- ===== کارڈ 4 ===== -->
+      <article id="post-4" class="post-card bg-white rounded-xl shadow-md overflow-hidden p-6 sm:p-10 space-y-6 border border-gray-200">
+        <a href="javascript:void(0)" onclick="openPostDetail(4)" class="block overflow-hidden rounded-lg group">
+          <img src="plastic-bottle-forming.jpg" alt="How are plastic bottles made?" class="w-full h-56 sm:h-80 md:h-96 object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://via.placeholder.com/800x500/e2e8f0/0f172a?text=Plastic+Bottle+Making'">
+        </a>
+        <div class="flex items-center space-x-6 text-sm text-sky-500 font-semibold pt-2">
+          <span class="flex items-center space-x-2"><i class="fa-regular fa-calendar-check text-base"></i> <span>2024/12/27</span></span>
+          <span class="flex items-center space-x-2"><i class="fa-regular fa-user text-base"></i> <span>Admin</span></span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug hover:text-sky-500 transition">
+          <a href="javascript:void(0)" onclick="openPostDetail(4)">
+            How are plastic bottles made?
+          </a>
+        </h2>
+        <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+          Plastic goes through a manufacturing process...
+        </p>
+        <div class="pt-2">
+          <a href="javascript:void(0)" onclick="openPostDetail(4)" class="inline-flex items-center space-x-3 bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm px-8 py-4 rounded-lg shadow-md transition uppercase tracking-wider">
+            <span>READ MORE</span>
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+          </a>
+        </div>
+      </article>
+
+      <!-- ================= تفصیل والا ڈبہ ================= -->
+      <div id="articleDetailView" class="hidden bg-white rounded-xl shadow-md p-6 sm:p-10 space-y-8 border border-gray-200">
+        <button onclick="showAllNewsList()" class="inline-flex items-center space-x-2 text-sky-500 hover:text-sky-600 font-bold text-sm mb-2">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back to All News</span>
+        </button>
+        <h1 id="detailTitle" class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-snug"></h1>
+        <div id="detailContent" class="space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed"></div>
+        <div id="detailTags" class="pt-8 border-t border-gray-200 space-y-3">
+          <h4 class="text-xl font-bold text-gray-900">Tags:</h4>
+          <div id="tagsList" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= SIDEBAR WIDGETS ================= -->
+    <aside class="space-y-12 bg-[#faf7f2] p-6 sm:p-10 rounded-xl shadow-sm border border-gray-200">
+
+      <div>
+        <form action="#" class="flex shadow-sm rounded-lg overflow-hidden">
+          <input type="text" placeholder="Search..." class="w-full bg-white border border-r-0 border-gray-300 px-5 py-4 text-base focus:outline-none text-gray-700">
+          <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white px-7 flex items-center justify-center transition">
+            <i class="fa-solid fa-magnifying-glass text-base"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="space-y-4">
+        <div class="border-b border-gray-300 pb-2">
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900">All Services</h3>
+          <span class="w-14 h-1 bg-sky-500 inline-block rounded-full"></span>
+        </div>
+        <div class="space-y-2 text-sm sm:text-base font-bold tracking-tight text-gray-800">
+          <a href="product1 (1).html" class="flex items-center justify-between py-4 border-b border-gray-200 hover:text-sky-500 transition">
+            <span>FULLY AUTOMATICBLOWING MACHINE</span>
+            <i class="fa-solid fa-arrow-right text-gray-500 text-sm"></i>
+          </a>
+          <a href="semi-automatic-blowing-machine.html" class="flex items-center justify-between py-4 border-b border-gray-200 hover:text-sky-500 transition">
+            <span>SEMI AUTOMATICBLOWING MACHINE</span>
+            <i class="fa-solid fa-arrow-right text-gray-500 text-sm"></i>
+          </a>
+          <a href="Pet-bottle-.html" class="flex items-center justify-between py-4 border-b border-gray-200 hover:text-sky-500 transition">
+            <span>BOTTLE MOLD&amp;PREFORM MOLD&amp;CAP MOLD</span>
+            <i class="fa-solid fa-arrow-right text-gray-500 text-sm"></i>
+          </a>
+          <a href="blowing-machine-axillary-equipmemts.html" class="flex items-center justify-between py-4 border-b border-gray-200 hover:text-sky-500 transition">
+            <span>BLOWING MACHINE AUXILIARY EQUIPMENTS</span>
+            <i class="fa-solid fa-arrow-right text-gray-500 text-sm"></i>
+          </a>
+          <a href="product-detail1.html?product=5" class="flex items-center justify-between py-4 border-b border-gray-200 hover:text-sky-500 transition">
+            <span>PREFORM&amp;CAP&amp;HANDLE</span>
+            <i class="fa-solid fa-arrow-right text-gray-500 text-sm"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="border-b border-gray-300 pb-2">
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900">Recent Post</h3>
+          <span class="w-14 h-1 bg-sky-500 inline-block rounded-full"></span>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4 bg-white p-3.5 rounded-lg shadow-sm border border-gray-200">
+            <a href="javascript:void(0)" onclick="openPostDetail(1)" class="w-28 h-20 bg-gray-200 flex-shrink-0 rounded-md overflow-hidden">
+              <img src="202412301043325965.jpg" alt="Recent 1" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/120x90/0284c7/ffffff'">
+            </a>
+            <div class="space-y-1">
+              <p class="text-xs sm:text-sm text-sky-500 font-medium flex items-center space-x-1">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>2024/12/30</span>
+              </p>
+              <a href="javascript:void(0)" onclick="openPostDetail(1)" class="text-sm sm:text-base font-bold text-gray-900 leading-snug hover:text-sky-500 transition line-clamp-2 block">
+                Cheap China Quality Mineral Water Bottle Blow Molding Machine
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4 bg-white p-3.5 rounded-lg shadow-sm border border-gray-200">
+            <a href="javascript:void(0)" onclick="openPostDetail(2)" class="w-28 h-20 bg-gray-200 flex-shrink-0 rounded-md overflow-hidden">
+              <img src="carbonated-baverage-bottle.jpg" alt="Recent 2" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/120x90/f59e0b/ffffff'">
+            </a>
+            <div class="space-y-1">
+              <p class="text-xs sm:text-sm text-sky-500 font-medium flex items-center space-x-1">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>2024/12/27</span>
+              </p>
+              <a href="javascript:void(0)" onclick="openPostDetail(2)" class="text-sm sm:text-base font-bold text-gray-900 leading-snug hover:text-sky-500 transition line-clamp-2 block">
+                2 cavity 2L 5L full automatic water bottle blowing machines
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4 bg-white p-3.5 rounded-lg shadow-sm border border-gray-200">
+            <a href="javascript:void(0)" onclick="openPostDetail(3)" class="w-28 h-20 bg-gray-200 flex-shrink-0 rounded-md overflow-hidden">
+              <img src="image.jpg" alt="Recent 3" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/120x90/334155/ffffff'">
+            </a>
+            <div class="space-y-1">
+              <p class="text-xs sm:text-sm text-sky-500 font-medium flex items-center space-x-1">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>2024/12/27</span>
+              </p>
+              <a href="javascript:void(0)" onclick="openPostDetail(3)" class="text-sm sm:text-base font-bold text-gray-900 leading-snug hover:text-sky-500 transition line-clamp-2 block">
+                PET Bottle Blowing Machines - High-Speed &amp; Efficient
+              </a>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4 bg-white p-3.5 rounded-lg shadow-sm border border-gray-200">
+            <a href="javascript:void(0)" onclick="openPostDetail(4)" class="w-28 h-20 bg-gray-200 flex-shrink-0 rounded-md overflow-hidden">
+              <img src="plastic-bottle-forming.jpg" alt="Recent 4" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/120x90/e2e8f0/0f172a'">
+            </a>
+            <div class="space-y-1">
+              <p class="text-xs sm:text-sm text-sky-500 font-medium flex items-center space-x-1">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>2024/12/27</span>
+              </p>
+              <a href="javascript:void(0)" onclick="openPostDetail(4)" class="text-sm sm:text-base font-bold text-gray-900 leading-snug hover:text-sky-500 transition line-clamp-2 block">
+                How are plastic bottles made?
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="border-b border-gray-300 pb-2">
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900">Popular Tags</h3>
+          <span class="w-14 h-1 bg-sky-500 inline-block rounded-full"></span>
+        </div>
+        <div class="flex flex-wrap gap-2.5 text-xs sm:text-sm text-gray-700">
+          <a href="tag.html?tag=moulding-manufacture" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Plastic Blow molding machine manufacture</a>
+          <a href="tag.html?tag=pet-bottle" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">pet bottle blow molding machine</a>
+          <a href="tag.html?tag=fully-automatic" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">fully automatic blowing machine</a>
+          <a href="tag.html?tag=handle-automatic" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">handle automatic blowing machine</a>
+          <a href="tag.html?tag=semi-automatic" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">semi automatic Blow molding machine</a>
+          <a href="tag.html?tag=jar-making" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Jar making machine</a>
+          <a href="tag.html?tag=bottle-molding" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">bottle molding machine</a>
+          <a href="tag.html?tag=stretch-blow" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">stretch blow moulding machine</a>
+          <a href="tag.html?tag=water-production" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Complete Water Production Line</a>
+          <a href="tag.html?tag=blow-molding" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">blow molding machine</a>
+          <a href="tag.html?tag=factory" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Blow molding machine factory</a>
+          <a href="tag.html?tag=2-cavity" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">2 Cavity Manufacturers Suppliers Factory</a>
+          <a href="tag.html?tag=5l-machine" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">5L Blow Molding Machine</a>
+          <a href="tag.html?tag=oil-bottle" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">30-2000ml plastic oil bottle</a>
+          <a href="tag.html?tag=edible-oil" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Edible Oil PET Blow Molding Machine</a>
+          <a href="tag.html?tag=3l-machine" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Bottle Blowing Machine 3L</a>
+          <a href="tag.html?tag=water-bottle" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Water Bottle Blowing Machine</a>
+          <a href="tag.html?tag=pet-preform" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">PET Preform Mold</a>
+          <a href="tag.html?tag=cap-mold" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Plastic Cap Compression Mold</a>
+          <a href="tag.html?tag=injection-molding" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Injection Molding Machine</a>
+          <a href="tag.html?tag=bottle-cap" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Bottle Cap Making Machine</a>
+          <a href="tag.html?tag=auxiliary-equipment" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">Blowing Machine Auxiliary Equipments</a>
+          <a href="tag.html?tag=high-speed" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">High Speed PET Blower</a>
+          <a href="tag.html?tag=china-suppliers" class="bg-white px-4 py-2.5 rounded-lg shadow-sm border border-gray-200 hover:bg-sky-500 hover:text-white transition font-semibold">China Blow Molding Machine Suppliers</a>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-[#0b1326] text-white text-center py-8 px-4 mt-16">
+  <div class="flex items-center justify-center gap-3 mb-3">
+    <img src="logo-icon.png" alt="Dua Saba Impex Logo" class="w-10 h-10 rounded-full object-cover border-2 border-white">
+    <span class="text-lg font-extrabold text-white">DUA SABA IMPEX PLASTIC MACHINERY</span>
+  </div>
+  <p class="text-xs sm:text-sm text-gray-300 tracking-wide">
+    Copyright@ 2024 Dua Saba Impex Plastic Machinery. All Rights Reserved.
+  </p>
+</footer>
+
+<script>
+  // ================= SIDEBAR =================
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+
+  function toggleProductDropdown() {
+    const dropdown = document.getElementById('productDropdown');
+    const btn = document.querySelector('.dropdown-btn');
+    dropdown.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
+  // ================= GO BACK TOP =================
+  const backToTopBtn = document.getElementById('backToTop');
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ================= ARTICLE DATA =================
+  const articlesData = {
+    1: {
+      title: "Cheap China Quality Mineral Water Bottle Blow Molding Machine",
+      content: `
+      
+      
+              <div class="my-6">
+          <img src="202412301043325965.jpg" alt="PET Bottle Blowing Machine Operating" class="w-full rounded-lg shadow-sm border border-gray-200 object-cover" onerror="this.src='https://via.placeholder.com/800x500/334155/ffffff?text=PET+Bottle+Blowing+Machines'">
+        </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-[#111827] leading-tight sm:leading-snug tracking-tight">
+        Cheap China Quality Mineral Water Bottle Blow Molding Machine
+      </h1>
+      <div class="my-4 overflow-hidden rounded border border-gray-200">
+        <img src="hot-selling-items-banner.jpg" alt="Hot Selling Items Banner" class="w-full h-auto object-cover" onerror="this.src='https://via.placeholder.com/800x400/0284c7/ffffff?text=Hot+Selling+Items'">
+      </div>
+      <p class="text-sm sm:text-base text-[#4b5563] leading-relaxed">
+        DUA SABA IMPEX can produce various shapes and sizes of plastic bottles and containers, including but not limited to:
+      </p>
+      <div class="space-y-3 sm:space-y-4 text-sm sm:text-base text-[#4b5563] leading-relaxed">
+        <p>- <strong>Round Bottles:</strong> Fully automatic blow molding machines can produce round bottles in various shapes and sizes, such as water bottles, juice bottles, soda bottles, etc.</p>
+        <p>- <strong>Square Bottles:</strong> Fully automatic blow molding machines can also produce square or rectangular bottles, which are commonly used for shipping liquid detergents, cleaning agents, soap solutions, etc.</p>
+        <p>- <strong>Oval Bottles:</strong> Fully automatic blow molding machines can produce oval-shaped bottles, which are commonly used for personal care products such as cosmetics, body washes, shampoos, etc.</p>
+        <p>- <strong>Irregular-Shaped Bottles:</strong> In addition to the above shapes, fully automatic blow molding machines can also produce bottles with unique shapes, such as flat bottles, triangular bottles, hexagonal bottles, etc.</p>
+      </div>
+      <p class="text-sm sm:text-base text-[#4b5563] leading-relaxed pt-1">
+        In reality, we can produce many different shapes and sizes of bottles, depending on its design and configuration. If you have any questions, please contact us.
+      </p>
+      `,
+      tags: ["Beverage Automatic Blow Molding Machine", "4 cavity pet bottle blowing machine"]
+    },
+    2: {
+      title: "2 cavity 2L 5L full automatic water bottle blowing machines",
+      content: `
+        <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Performance and Characteristics of PET blow molding machine</h2>
+        <h3 class="text-lg font-bold text-gray-800 mt-4">Machine Features</h3>
+        <ul class="space-y-3 text-base sm:text-lg text-gray-700 leading-relaxed">
+          <li><strong>A.</strong> Advanced PLC control system and touch screen with convenient operation.</li>
+          <li><strong>B.</strong> High efficiency automatic preform loading device.</li>
+          <li><strong>C.</strong> Precise infrared heating, the preform rotates by itself and on the orbit at the same time, with strong penetration and high heating efficiency.</li>
+          <li><strong>D.</strong> High security, when a failure occurs during action or machine running, the program will alarm immediately and display the cause of the failure.</li>
+          <li><strong>E.</strong> Two ways of operate: automatic and manual.</li>
+          <li><strong>F.</strong> Customized machine design saves space and energy.</li>
+          <li><strong>G.</strong> Simple installation and operation. For the automatic design, the heating and blowing process are separated in two parts, which requires workers to put the bottle preforms into the heating device and then take out the heated bottle preforms to the blowing machine for making bottles.</li>
+        </ul>
+        <div class="my-6 space-y-2">
+          <img src="2-5l-bottle.jpg" alt="A2-5L Mold" class="w-full max-w-xl mx-auto rounded-lg shadow-sm border border-gray-200" onerror="this.src='https://via.placeholder.com/600x380/0f172a/ffffff?text=A2-5L+PET+Bottle+Mold'">
+          <p class="text-sm text-gray-600 font-medium italic text-center sm:text-left">A2-5L high speed full automatic pet</p>
+        </div>
+        <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+          A2-5L high speed full automatic pet bottle blower can produce different shapes from 1L to 7L water bottles, edible oil bottles and other plastic PET containers. High speed, low defect rate, stable running and easy operation.
+        </p>
+        <h3 class="text-lg font-bold text-gray-800 mt-6">Machine Parts</h3>
+        <ul class="space-y-2 text-base sm:text-lg text-gray-700 leading-relaxed">
+          <li><strong>a. PLC controller touch screen :</strong> Mitsubishi (Japan)</li>
+          <li><strong>b. Pneumatic parts: AIRTAC(TAIWAN)</strong></li>
+          <li><strong>c. Controller of stretch, shift, clamping servo motor :</strong> Mitsubishi (Japan)</li>
+          <li><strong>d. Other parts are world-famous brands</strong></li>
+        </ul>
+        <div class="my-6">
+          <img src="a2-5l-bottle.jpg" alt="Plastic PET Containers" class="w-full max-w-xl mx-auto rounded-lg shadow-sm border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400/f8fafc/0f172a?text=5L+PET+Water+Bottles'">
+        </div>
+      `,
+      tags: ["pet bottle blow molding machine", "5L Blow Molding Machine", "Water Bottle Making Machine", "PET blowing machine factory"]
+    },
+    3: {
+      title: "PET Bottle Blowing Machines - High-Speed & Efficient",
+      content: `
+        <div class="my-6">
+          <img src="pet-blowing-machines1.jpg" alt="PET Bottle Blowing Machine Operating" class="w-full rounded-lg shadow-sm border border-gray-200 object-cover" onerror="this.src='https://via.placeholder.com/800x500/334155/ffffff?text=PET+Bottle+Blowing+Machines'">
+        </div>
+        <div class="space-y-3">
+          <h2 class="text-lg sm:text-xl font-bold text-gray-800">1.How to operate the bottle blowing machine?</h2>
+          <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+            The bottle blowing machine is very easy to operate. It has an operating instruction. It is clearly that how to operate the bottle blowing machine in operating instruction. The bottle blowing machine can be easily used according to the operating instruction. Of course, you can contact us when you have any questions, we will help you solve it in time.
+          </p>
+        </div>
+        <div class="space-y-3 mt-6">
+          <h2 class="text-lg sm:text-xl font-bold text-gray-800">2. Dose the bottle blowing machine need daily maintaining?</h2>
+          <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+            It is necessary that the bottle blowing machine needs scheduled maintenance. Especially, water system and air system in the machine, It should be noted that once there is a problem with the water system and the air system, you should stop using it immediately. Of course, environmental factors should also be considered, a few days ago there was a mineral water canning factory located at the foot of the mountain, due to the production environment is relatively humid, the machine has never been maintained, resulting in rust in the chain of the machine so that the machine can not produce.
+          </p>
+        </div>
+        <div class="space-y-3 mt-6">
+          <h2 class="text-lg sm:text-xl font-bold text-gray-800">3. Why do bottles produced by machines deform?</h2>
+          <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+            There are two reasons for the deformation of bottles produced by the bottle blowing machine: bottle mouth deformation and bottle body deformation.
+          </p>
+          <p class="text-base sm:text-lg text-gray-700 leading-relaxed pt-2">
+            <strong>Bottle mouth deformation:</strong> The preform bottle is moved through the transmission chain and the heating tube makes the temperature of the preform bottle constantly rise. The transmission chain is used in circulation. The temperature of the transmission chain is high after continuous heating. As a result, the temperature of the bottle mouth will be higher than that of the bottle body when the preform bottle passes through the heating tube, and the bottle mouth will be deformed. At this time, the temperature of the bottle mouth can be reduced by increasing the cold air or cold water at the mouth of the bottle.
+          </p>
+        </div>
+        <div class="my-6">
+          <img src="pet-blowing-machine2.jpg" alt="Machine Clamping and Heating Mechanism Detail" class="w-full rounded-lg shadow-sm border border-gray-200 object-cover" onerror="this.src='https://via.placeholder.com/800x500/334155/ffffff?text=Machine+Detail'">
+        </div>
+        <div class="space-y-3">
+          <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+            <strong>Bottle deformation:</strong> The common reason for bottle deformation is that the tension rod is not adjusted properly. It is recommended that the stretch ratio between the preform bottle and the bottle body is 1:2.5 (excluding the bottle mouth), and the heating temperature is adjusted to extend the blowing time.
+          </p>
+        </div>
+      `,
+      tags: ["fully automatic blowing machine", "High Speed PET Blower", "bottle molding machine"]
+    },
+    4: {
+      title: "How are plastic bottles made?",
+      content: `
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-[#111827] leading-snug tracking-tight">
+        How are plastic bottles made?
+      </h1>
+      <p class="text-sm sm:text-base text-[#4b5563] leading-relaxed">
+        Plastic goes through a manufacturing process to end up as bottles for liquid substances such as milk, soda, motor oil and shampoo, and for dry products such as medications and nutritional supplements. Plastic bottles have become an everyday occurrence, but have you ever wondered how are plastic bottles made?
+      </p>
+      <h2 class="text-base sm:text-lg font-bold text-[#1f2937] pt-2">
+        Production of preformed bottles
+      </h2>
+      <p class="text-sm sm:text-base text-[#4b5563] leading-relaxed">
+        Firstly, plastic particles are made into preformed bottles using an injection molding machine. After the plastic particles are softened by high temperature, the corresponding preformed bottles are made by preforming molds under high pressure.
+      </p>
+      <div class="my-4 overflow-hidden rounded border border-gray-200">
+        <img src="plastic-bottle-formed1.jpg" alt="Plastic Bottle Preforms" class="w-full h-auto object-cover" onerror="this.src='https://via.placeholder.com/800x500/e2e8f0/0f172a?text=Plastic+Bottle+Preforms'">
+      </div>
+      <h2 class="text-base sm:text-lg font-bold text-[#1f2937] pt-2">
+        The forming of the bottle
+      </h2>
+      <p class="text-sm sm:text-base text-[#4b5563] leading-relaxed">
+        Secondly, preformed bottles are made into plastic bottles using an stretch blowing mold machine. After the preformed bottles are softened by high temperature, the corresponding plastic bottles are made by molds under high pressure.
+      </p>
+      <div class="my-4 overflow-hidden rounded border border-gray-200">
+        <img src="pet-blowing-machine2.jpg" alt="Various Plastic Water Bottles and Containers" class="w-full h-auto object-cover" onerror="this.src='https://via.placeholder.com/800x500/334155/ffffff?text=Bottles'">
+      </div>
+      `,
+      tags: ["Blowing machine manufacturing", "Blow Moulding Machine"]
+    }
+  };
+
+  // ================= OPEN POST DETAIL =================
+  function openPostDetail(id) {
+    const postCards = document.querySelectorAll('.post-card');
+    postCards.forEach(card => card.classList.add('hidden'));
+
+    const data = articlesData[id];
+    if (data) {
+      document.getElementById('detailTitle').innerHTML = data.title;
+      document.getElementById('detailContent').innerHTML = data.content;
+
+      const tagsContainer = document.getElementById('tagsList');
+      tagsContainer.innerHTML = '';
+      data.tags.forEach(tag => {
+        const tagSlug = tag.toLowerCase().replace(/\s+/g, '-');
+        const tagLink = document.createElement('a');
+        tagLink.href = `tag.html?tag=${encodeURIComponent(tagSlug)}`;
+        tagLink.target = '_blank';
+        tagLink.rel = 'noopener noreferrer';
+        tagLink.className = 'bg-gray-100 border border-gray-300 text-gray-700 font-semibold px-3 py-1.5 rounded text-xs sm:text-sm hover:bg-sky-500 hover:text-white transition';
+        tagLink.innerText = tag;
+        tagsContainer.appendChild(tagLink);
+      });
+
+      document.getElementById('articleDetailView').classList.remove('hidden');
+      window.scrollTo({ top: 400, behavior: 'smooth' });
+    }
+  }
+
+  // ================= BACK TO LIST =================
+  function showAllNewsList() {
+    document.getElementById('articleDetailView').classList.add('hidden');
+    const postCards = document.querySelectorAll('.post-card');
+    postCards.forEach(card => card.classList.remove('hidden'));
+    window.scrollTo({ top: 400, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

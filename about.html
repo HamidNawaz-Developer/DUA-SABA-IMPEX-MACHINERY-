@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - DUA SABA IMPEX PLASTIC MACHINERY</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    .bg-dark-sidebar { background-color: #0E1626; }
+    .bg-dark-section { background-color: #0B132B; }
+
+    /* Vertical Floating 'GO BACK TOP' Button */
+    .vertical-back-top {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* ================= SIDEBAR ================= */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      display: none;
+    }
+    .sidebar-overlay.active { display: block; }
+    .sidebar {
+      position: fixed;
+      top: 0; left: -300px;
+      width: 300px; height: 100vh;
+      background: #0b1320;
+      color: #fff;
+      z-index: 999;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar.active { left: 0; }
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .sidebar-logo { display: flex; align-items: center; gap: 10px; }
+    .sidebar-brand { font-size: 13px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+    .sidebar-close { color: #fff; font-size: 20px; cursor: pointer; }
+    .sidebar-menu { list-style: none; padding: 10px 0; flex-grow: 1; }
+    .sidebar-menu li { border-bottom: 1px solid #1e293b; }
+    .sidebar-menu a,
+    .menu-item-with-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .sidebar-menu a:hover,
+    .menu-item-with-btn:hover { color: #38bdf8; }
+    .dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px; height: 24px;
+      background: #0284c7;
+      color: #fff;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .dropdown-btn.open {
+      transform: rotate(90deg);
+      background: #ffffff;
+      color: #0284c7;
+    }
+    .product-dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #070d19;
+    }
+    .product-dropdown.open { max-height: 400px; }
+    .product-dropdown a {
+      padding: 12px 20px 12px 30px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      border-bottom: 1px solid #151f30;
+      text-transform: uppercase;
+    }
+    .sidebar-contact { padding: 16px 20px; border-top: 1px solid #1e293b; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+    .contact-icon {
+      width: 30px; height: 30px;
+      background: #0284c7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .sidebar-social {
+      display: flex;
+      gap: 16px;
+      padding: 16px 20px;
+      border-top: 1px solid #1e293b;
+      font-size: 18px;
+    }
+    .sidebar-social a { color: #cbd5e1; text-decoration: none; }
+    .sidebar-social a:hover { color: #38bdf8; }
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+      background-color: #ffffff;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.06);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-container img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e2e8f0;
+    }
+    .logo-text {
+      font-size: 15px;
+      font-weight: 900;
+      color: #004b93;
+      font-style: italic;
+      line-height: 1.1;
+      letter-spacing: -0.3px;
+    }
+    .menu-btn {
+      cursor: pointer;
+      padding: 6px;
+      border: none;
+      background: transparent;
+      color: #007bff;
+      font-size: 22px;
+    }
+
+    /* ================= SCROLL REVEAL (LEFT / RIGHT) ================= */
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-80px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(80px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-700 bg-white antialiased relative">
+
+<!-- ================= SIDEBAR OVERLAY ================= -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- ================= SIDEBAR MENU ================= -->
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <img src="logo-icon.png" alt="Dua Saba Impex Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #fff;">
+      <span class="sidebar-brand">DUA SABA IMPEX</span>
+    </div>
+    <div class="sidebar-close" onclick="toggleSidebar()">✕</div>
+  </div>
+
+  <ul class="sidebar-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About us</a></li>
+    <li class="has-dropdown">
+      <div class="menu-item-with-btn" onclick="toggleProductDropdown()">
+        <span>Product</span>
+        <span class="dropdown-btn">›</span>
+      </div>
+      <div id="productDropdown" class="product-dropdown">
+        <a href="product1.html">FULLY AUTOMATIC BLOWING MACHINE</a>
+        <a href="semi-automatic-blowing-macine.html">SEMI AUTOMATIC BLOWING MACHINE</a>
+        <a href="Pet-bottle-.html">BOTTLE MOLD & PREFORM MOLD & CAP MOLD</a>
+        <a href="pet-blowing-axillary-equipments.html">BLOWING MACHINE AUXILIARY EQUIPMENTS</a>
+        <a href="product-detail1.html?product=5">PREFORM & CAP & HANDLE</a>
+      </div>
+    </li>
+    <li><a href="application.html">Application</a></li>
+    <li><a href="video.html">Video</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="sidebar-contact">
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+      <span>sabaplastic007@yahoo.com</span>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+      <span>+92 300 9228618</span>
+    </div>
+  </div>
+
+  <div class="sidebar-social">
+    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+  </div>
+</div>
+
+<!-- ================= FLOATING GO BACK TOP ================= -->
+<button id="backToTop" class="fixed right-2 bottom-6 z-50 flex flex-col items-center space-y-1 text-xs font-bold tracking-widest text-sky-500 uppercase focus:outline-none hover:text-sky-600 transition">
+  <span class="vertical-back-top">GO BACK TOP</span>
+  <span class="w-1.5 h-8 bg-sky-500 inline-block rounded-full"></span>
+</button>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <a href="index.html" class="logo-container">
+    <img src="logo-icon.png" alt="Dua Saba Impex Logo">
+    <span class="logo-text">DUA SABA IMPEX<br>PLASTIC MACHINERY</span>
+  </a>
+  <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</header>
+
+<!-- ================= BREADCRUMB HERO BANNER ================= -->
+<section class="reveal-up relative bg-slate-900 text-white py-16 px-6 overflow-hidden">
+  <div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity" style="background-image: url('about-v3-img1.jpg');"></div>
+  <div class="absolute inset-0 bg-sky-900/40"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto space-y-2">
+    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+      DUA SABA IMPEX PLASTIC MACHINERY
+    </h1>
+    <p class="text-xs sm:text-sm text-gray-200">
+      Your Location: <a href="index.html" class="hover:underline">Home</a> &nbsp;&raquo;&nbsp; <span class="font-semibold text-white">About Us</span>
+    </p>
+  </div>
+</section>
+
+<!-- ================= MAIN ABOUT US SECTION ================= -->
+<section class="py-10 px-4 max-w-4xl mx-auto space-y-6">
+  <!-- Main Factory Building Image (Left Slide) -->
+  <div class="reveal-left rounded overflow-hidden shadow-sm">
+    <img src="house.jpg" alt="Factory Building" class="w-full h-auto object-cover">
+  </div>
+
+  <!-- Section Sub-heading (Left Slide) -->
+  <div class="reveal-left text-sky-500 text-xs font-bold uppercase tracking-widest flex items-center space-x-2 pt-2">
+    <span class="w-4 h-0.5 bg-sky-500 inline-block"></span>
+    <i class="fa-solid fa-circle text-[5px]"></i>
+    <span>ABOUT US</span>
+  </div>
+
+  <!-- Main Title (Right Slide) -->
+  <h2 class="reveal-right text-2xl sm:text-3xl font-extrabold text-gray-900 leading-snug">
+    DUA SABA IMPEX PLASTIC MACHINERY, Your Professional Blow Molding Machine & Preform Mold Service Provider in Pakistan
+  </h2>
+
+  <!-- Description Paragraph (Left Slide) -->
+  <p class="reveal-left text-xs sm:text-sm text-gray-600 leading-relaxed text-justify sm:text-left">
+    DUA SABA IMPEX PLASTIC MACHINERY is founded in 2012, located in Karachi city, Pakistan. We are professional Provider of PET bottle blowing machines, plastic molds, etc... Our machine are suitable for 5ml-25L plastic bottles, water bottles, carbonated beverage bottles, oil bottles, cosmetics bottles. We can equip machine from 1-12 cavity, output from hundreds bottles to 10000 bottles/hour, also provide full set of production system from preform production, bottle blowing, filling to final packaging. Our products has covered all over Pakistan and exported to more than 100 cities, including Karachi, Islamabad, Lahore, Quetta, Peshawar, Faisalabad, Gujranwala etc. We'd like to provide high quality solution to clients with our enthusiasm and rich experience. We sincerely hope to establish business relationship with friends all over the world.
+  </p>
+
+  <!-- Contact Us Button (Right Slide) -->
+  <div class="reveal-right pt-2">
+    <a href="#contact" class="inline-flex items-center space-x-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold text-xs px-5 py-3 rounded shadow transition">
+      <span class="uppercase tracking-wider">CONTACT US</span>
+      <i class="fa-solid fa-arrow-right text-xs"></i>
+    </a>
+  </div>
+</section>
+
+<!-- ================= FULL WIDTH BLUE BANNER (Left Slide) ================= -->
+<section class="reveal-left w-full bg-sky-600 relative overflow-hidden my-8">
+  <div class="h-64 sm:h-80 w-full bg-cover bg-center opacity-40 mix-blend-overlay" style="background-image: url('about-v3-img1.jpg');"></div>
+</section>
+
+<!-- ================= WHY WE CHOOSE US SECTION ================= -->
+<section class="bg-dark-section text-white py-12 px-4">
+  <div class="max-w-4xl mx-auto space-y-6">
+
+    <!-- Sub-heading (Left Slide) -->
+    <div class="reveal-left text-sky-400 text-xs font-bold uppercase tracking-widest flex items-center space-x-2">
+      <span class="w-4 h-0.5 bg-sky-400 inline-block"></span>
+      <i class="fa-solid fa-circle text-[5px]"></i>
+      <span>WHY WE CHOOSE US</span>
+    </div>
+
+    <!-- Heading (Right Slide) -->
+    <h2 class="reveal-right text-2xl sm:text-3xl font-extrabold text-white leading-snug">
+      Reliable Reputation: Over 15 years Production experience
+    </h2>
+
+    <!-- Description Paragraph (Left Slide) -->
+    <p class="reveal-left text-xs sm:text-sm text-gray-300 leading-relaxed text-justify sm:text-left">
+      We can help you increase the flexibility of your production lines, employees and costs. We can design new packaging for you to achieve fast and efficient line conversion, so that you can improve equipment performance in the shortest time, produce more products or change to different products. We can also help you with maintenance and training, and continuously upgrade and optimize your line according to your needs.
+    </p>
+
+    <!-- 4 Feature Cards (Alternate Left / Right Slides) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+
+      <!-- Card 1 (Left Slide) -->
+      <div class="reveal-left bg-white text-gray-900 p-5 rounded-md flex items-center space-x-4 shadow">
+        <div class="text-sky-500 text-4xl">
+          <i class="fa-solid fa-box-archive"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm sm:text-base text-gray-900 leading-tight">100% After Sales</h4>
+          <p class="text-xs sm:text-sm font-semibold text-gray-700">Support</p>
+        </div>
+      </div>
+
+      <!-- Card 2 (Right Slide) -->
+      <div class="reveal-right bg-white text-gray-900 p-5 rounded-md flex items-center space-x-4 shadow">
+        <div class="text-sky-500 text-4xl">
+          <i class="fa-solid fa-handshake"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm sm:text-base text-gray-900 leading-tight">15year Production</h4>
+          <p class="text-xs sm:text-sm font-semibold text-gray-700">experience</p>
+        </div>
+      </div>
+
+      <!-- Card 3 (Left Slide) -->
+      <div class="reveal-left bg-white text-gray-900 p-5 rounded-md flex items-center space-x-4 shadow">
+        <div class="text-sky-500 text-4xl">
+          <i class="fa-solid fa-house-circle-check"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm sm:text-base text-gray-900 leading-tight">50Multiple Sales</h4>
+          <p class="text-xs sm:text-sm font-semibold text-gray-700">Country</p>
+        </div>
+      </div>
+
+      <!-- Card 4 (Right Slide) -->
+      <div class="reveal-right bg-white text-gray-900 p-5 rounded-md flex items-center space-x-4 shadow">
+        <div class="text-sky-500 text-4xl">
+          <i class="fa-solid fa-users-gear"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm sm:text-base text-gray-900 leading-tight">100% Quality</h4>
+          <p class="text-xs sm:text-sm font-semibold text-gray-700">Inspection</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= GALLERY GRID SECTION ================= -->
+<section class="py-10 px-4 max-w-4xl mx-auto">
+  <div class="grid grid-cols-2 gap-3">
+    <div class="reveal-left border border-sky-400 rounded overflow-hidden">
+      <img src="about1.jpg" alt="Factory interior" class="w-full h-44 sm:h-52 object-cover">
+    </div>
+    <div class="reveal-right border border-sky-400 rounded overflow-hidden">
+      <img src="about2.jpg" alt="Team Group" class="w-full h-44 sm:h-52 object-cover">
+    </div>
+    <div class="reveal-left border border-sky-400 rounded overflow-hidden">
+      <img src="about4.jpg" alt="Showroom" class="w-full h-44 sm:h-52 object-cover">
+    </div>
+    <div class="reveal-right border border-sky-400 rounded overflow-hidden">
+      <img src="about3.jpg" alt="Container Loading" class="w-full h-44 sm:h-52 object-cover">
+    </div>
+    <div class="reveal-left border border-sky-400 rounded overflow-hidden">
+      <img src="about6.jpg" alt="Container Loading" class="w-full h-44 sm:h-52 object-cover">
+    </div>
+    <div class="reveal-right border border-sky-400 rounded overflow-hidden">
+      <img src="about5.jpg" alt="Container Loading" class="w-full h-44 sm:h-52 object-cover">
+    </div>
+  </div>
+</section>
+
+<!-- ================= CO-FOUNDER SECTION (Replaces Great Team) ================= -->
+<section class="py-16 bg-gray-50 px-4 text-center">
+  <div class="reveal-up text-sky-500 text-xs font-bold uppercase tracking-widest mb-1 flex items-center justify-center space-x-2">
+    <span>—&bull;—</span>
+    <span>CO FOUNDER OF DUA SABA IMPEX PLASTIC MACHINERY</span>
+    <span>—&bull;—</span>
+  </div>
+  <h2 class="text-2xl font-extrabold text-gray-900 mb-12"></h2>
+
+  <div class="flex justify-center items-center">
+    <div class="reveal-up bg-white border-2 border-sky-400 rounded-lg overflow-hidden shadow-lg max-w-xs w-full">
+      <img src="ceo.jpg" alt="Danish Saba" class="w-full h-72 object-cover bg-gray-100" onerror="this.src='https://via.placeholder.com/300x400/004b93/ffffff?text=Danish+Saba'">
+      <div class="bg-sky-500 text-white p-5 space-y-2">
+        <h4 class="font-bold text-lg">Danish Saba</h4>
+        <p class="text-xs underline break-all">danishsaba20@gmail.com</p>
+        <div class="flex items-center justify-center space-x-1 text-xs">
+          <i class="fa-solid fa-phone"></i>
+          <span>+92300 9228618</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-[#0b101d] text-white text-center py-8 px-4">
+  <div class="flex items-center justify-center gap-3 mb-3">
+    <img src="logo-icon.png" alt="Dua Saba Impex Logo" class="w-10 h-10 rounded-full object-cover border-2 border-white">
+    <span class="text-lg font-extrabold text-white">DUA SABA IMPEX PLASTIC MACHINERY</span>
+  </div>
+  <p class="text-xs sm:text-sm text-gray-300 tracking-wide">
+    Copyright@ 2024 Dua Saba Impex Plastic Machinery. All Rights Reserved.
+  </p>
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+  // ================= SIDEBAR =================
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+
+  function toggleProductDropdown() {
+    const dropdown = document.getElementById('productDropdown');
+    const btn = document.querySelector('.dropdown-btn');
+    dropdown.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
+  // ================= GO BACK TOP =================
+  document.getElementById('backToTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ================= SCROLL REVEAL =================
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, {
+    threshold: 0.15
+  });
+
+  document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up').forEach(el => {
+    revealObserver.observe(el);
+  });
+</script>
+
+</body>
+</html>

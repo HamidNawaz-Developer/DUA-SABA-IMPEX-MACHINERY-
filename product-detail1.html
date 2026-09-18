@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Detail - Dua Saba Impex</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f5f7; color: #333333; line-height: 1.5; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ================= SIDEBAR ================= */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      display: none;
+    }
+    .sidebar-overlay.active { display: block; }
+    .sidebar {
+      position: fixed;
+      top: 0; left: -300px;
+      width: 300px; height: 100vh;
+      background: #0b1320;
+      color: #fff;
+      z-index: 999;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar.active { left: 0; }
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .sidebar-logo { display: flex; align-items: center; gap: 10px; }
+    .sidebar-brand { font-size: 13px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+    .sidebar-close { color: #fff; font-size: 20px; cursor: pointer; }
+    .sidebar-menu { list-style: none; padding: 10px 0; flex-grow: 1; }
+    .sidebar-menu li { border-bottom: 1px solid #1e293b; }
+    .sidebar-menu a,
+    .menu-item-with-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .sidebar-menu a:hover,
+    .menu-item-with-btn:hover { color: #38bdf8; }
+    .dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px; height: 24px;
+      background: #0284c7;
+      color: #fff;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .dropdown-btn.open {
+      transform: rotate(90deg);
+      background: #ffffff;
+      color: #0284c7;
+    }
+    .product-dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #070d19;
+    }
+    .product-dropdown.open { max-height: 400px; }
+    .product-dropdown a {
+      padding: 12px 20px 12px 30px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      border-bottom: 1px solid #151f30;
+      text-transform: uppercase;
+    }
+    .sidebar-contact { padding: 16px 20px; border-top: 1px solid #1e293b; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+    .contact-icon {
+      width: 30px; height: 30px;
+      background: #0284c7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .sidebar-social {
+      display: flex;
+      gap: 16px;
+      padding: 16px 20px;
+      border-top: 1px solid #1e293b;
+      font-size: 18px;
+    }
+    .sidebar-social a { color: #cbd5e1; text-decoration: none; }
+    .sidebar-social a:hover { color: #38bdf8; }
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+      background-color: #ffffff;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.06);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-container img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e2e8f0;
+    }
+    .logo-text {
+      font-size: 15px;
+      font-weight: 900;
+      color: #004b93;
+      font-style: italic;
+      line-height: 1.1;
+      letter-spacing: -0.3px;
+    }
+    .hamburger-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: #007bff;
+      font-size: 22px;
+    }
+
+    /* ================= HERO BANNER ================= */
+    .hero-banner {
+      position: relative;
+      background: linear-gradient(rgba(0, 60, 120, 0.78), rgba(0, 30, 70, 0.88)),
+                  url('about-v3-img1.jpg') center/cover no-repeat;
+      color: #ffffff;
+      padding: 50px 16px 40px 16px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-title {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 20px;
+      max-width: 95%;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .breadcrumb {
+      font-size: 13px;
+      color: #e2e8f0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+    .breadcrumb a { color: #ffffff; font-weight: bold; }
+
+    /* Tablet */
+    @media (min-width: 768px) {
+      .hero-banner {
+        min-height: 380px;
+        padding: 70px 40px 50px 40px;
+      }
+      .hero-title { font-size: 32px; max-width: 75%; }
+      .breadcrumb { font-size: 14px; }
+    }
+
+    /* Desktop */
+    @media (min-width: 1200px) {
+      .hero-banner {
+        min-height: 450px;
+        padding: 90px 60px 70px 60px;
+      }
+      .hero-title { font-size: 38px; max-width: 65%; }
+    }
+
+    /* ================= PRODUCT CONTENT ================= */
+    .product-container { padding: 16px; }
+    .product-main-image { width: 100%; background: #ffffff; border-radius: 8px; padding: 16px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+    .product-main-image img { width: 100%; height: auto; object-fit: contain; }
+    .product-title { font-size: 20px; font-weight: 800; color: #111827; line-height: 1.3; margin-bottom: 16px; }
+    .product-description { font-size: 14px; color: #4b5563; line-height: 1.6; margin-bottom: 24px; }
+    .product-description p { margin-bottom: 12px; }
+
+    .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; background: #ffffff; font-size: 13px; }
+    .spec-table tr:nth-child(even) { background-color: #f8fafc; }
+    .spec-table td { padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155; }
+    .spec-table td.label { font-weight: 600; color: #1e293b; width: 35%; }
+
+    .company-section { background: #000000; padding: 8px; margin-bottom: 24px; }
+    .section-banner { background-color: #0b3c7d; color: #ffffff; font-size: 11px; font-weight: bold; padding: 4px 8px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .image-grid { display: flex; flex-direction: column; gap: 8px; }
+    .image-grid img { width: 100%; height: auto; display: block; }
+
+    .sidebar-widget { background: #fdfbf7; padding: 20px 16px; margin-bottom: 16px; }
+    .widget-title { font-size: 16px; font-weight: 800; color: #111827; margin-bottom: 12px; }
+    .widget-list { list-style: none; }
+    .widget-list li { margin-bottom: 10px; }
+    .widget-list a { font-size: 12px; font-weight: 700; color: #334155; text-transform: uppercase; display: block; }
+    .widget-list a:hover { color: #0088cc; }
+
+    .tags-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag-item { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 5px 10px; font-size: 10px; color: #475569; font-weight: 500; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03); }
+    .tag-item:hover { background: #004494; color: #ffffff; border-color: #004494; }
+
+    .go-back-top { position: fixed; right: 8px; bottom: 50px; display: flex; flex-direction: column; align-items: center; cursor: pointer; z-index: 99; }
+    .go-back-top .text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 9px; font-weight: 800; color: #0088cc; letter-spacing: 1px; margin-bottom: 4px; }
+    .go-back-top .bar { width: 3px; height: 18px; background-color: #0088cc; }
+
+    /* ================= FOOTER ================= */
+    .footer { background-color: #0b101d; color: #cbd5e1; text-align: center; padding: 25px 16px; font-size: 12px; }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .footer-logo img {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+    .footer-logo span { font-size: 16px; font-weight: 900; color: #fff; }
+
+    /* Responsive Table Wrapper */
+    .table-responsive-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 24px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+    }
+    .table-responsive-wrapper .spec-table { min-width: 500px; margin-bottom: 0; }
+    @media (max-width: 640px) {
+      .table-responsive-wrapper .spec-table { font-size: 11px; }
+      .table-responsive-wrapper .spec-table td { padding: 6px 8px; }
+    }
+
+    /* Product Detail Images Responsive */
+    .product-detail-img {
+      width: 100%; max-width: 100%; height: auto;
+      max-height: 400px; object-fit: contain;
+      display: block; margin: 16px 0; border-radius: 8px;
+      background: #f8f9fa; padding: 8px; box-sizing: border-box;
+    }
+    .product-video-wrapper {
+      width: 100%; max-width: 100%; margin: 16px 0;
+      border-radius: 8px; overflow: hidden; background: #000;
+    }
+    .product-video-wrapper video {
+      width: 100%; height: auto; max-height: 400px; display: block;
+    }
+    @media (max-width: 640px) {
+      .product-detail-img { max-height: 280px; padding: 4px; }
+      .product-video-wrapper video { max-height: 250px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= SIDEBAR OVERLAY ================= -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- ================= SIDEBAR MENU ================= -->
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <img src="logo-icon.png" alt="Dua Saba Impex Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #fff;">
+      <span class="sidebar-brand">DUA SABA IMPEX</span>
+    </div>
+    <div class="sidebar-close" onclick="toggleSidebar()">✕</div>
+  </div>
+  
+  <ul class="sidebar-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About us</a></li>
+    <li class="has-dropdown">
+      <div class="menu-item-with-btn" onclick="toggleProductDropdown()">
+        <span>Product</span>
+        <span class="dropdown-btn">›</span>
+      </div>
+      <div id="productDropdown" class="product-dropdown">
+        <a href="product1.html">FULLY AUTOMATIC BLOWING MACHINE</a>
+        <a href="semi-automatic-blowing-macine.html">SEMI AUTOMATIC BLOWING MACHINE</a>
+        <a href="Pet-bottle-.html">BOTTLE MOLD & PREFORM MOLD & CAP MOLD</a>
+        <a href="pet-blowing-axillary-equipments.html">BLOWING MACHINE AUXILIARY EQUIPMENTS</a>
+        <a href="product-detail1.html?product=5">PREFORM & CAP & HANDLE</a>
+      </div>
+    </li>
+    <li><a href="application.html">Application</a></li>
+    <li><a href="video.html">Video</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  
+  <div class="sidebar-contact">
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+      <span>sabaplastic007@yahoo.com</span>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+      <span>+92 300 9228618</span>
+    </div>
+  </div>
+  
+  <div class="sidebar-social">
+    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+  </div>
+</div>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <a href="index.html" class="logo-container">
+    <img src="logo-icon.png" alt="Dua Saba Impex Logo">
+    <span class="logo-text">DUA SABA IMPEX<br>PLASTIC MACHINERY</span>
+  </a>
+  <button class="hamburger-btn" onclick="toggleSidebar()">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</header>
+
+<!-- ================= HERO BANNER ================= -->
+<section class="hero-banner">
+  <h1 class="hero-title" id="heroTitle">Automatic Blow Molding Machine</h1>
+  <div class="breadcrumb">
+    <span>Your Location:</span>
+    <a href="index.html">Home</a> <span>»</span>
+    <a href="products.html">Product</a> <span>»</span>
+    <span id="breadcrumbTitle" style="font-weight: bold; text-transform: uppercase;">FULLY AUTOMATIC MACHINE</span>
+  </div>
+</section>
+
+<!-- ================= DYNAMIC PRODUCT DETAIL ================= -->
+<main class="product-container" id="productContainer">
+  <!-- JavaScript will inject content here -->
+</main>
+
+<!-- Go Back Top -->
+<div class="go-back-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+  <span class="text">GO BACK TOP</span>
+  <div class="bar"></div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-logo">
+    <img src="logo-icon.png" alt="Dua Saba Impex Logo">
+    <span>DUA SABA IMPEX PLASTIC MACHINERY</span>
+  </div>
+  <p>Copyright@ 2024 Dua Saba Impex Plastic Machinery. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // ================= SIDEBAR TOGGLE =================
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+
+  // ================= PRODUCT DROPDOWN =================
+  function toggleProductDropdown() {
+    const dropdown = document.getElementById('productDropdown');
+    const btn = document.querySelector('.dropdown-btn');
+    dropdown.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
+  // ================= URL PARAMETER =================
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get('product') || '1';
+
+  // ================= PRODUCTS DATA ===============
+    // ... (aapka saara productsData yahan paste karein - jo aapki file mein hai) ...
+    
+        // ==========================================
+    const productsData = {
+      '1': {
+        title: 'Cheap Price 4 Cavities Full Automatic Pure Water PET Plastic Bottle Blowing Making Machine',
+        breadcrumb: 'FULLY AUTOMATIC MACHINE',
+        image: 'daily-chemistry2.jpg',
+        description: `
+          <p>1500 bottles per hour (750 ml plastic bottles), max volume 2L plastic bottle, suitable for blowing any kind of carbonated beverage bottle, sparkling beverage bottle, pure water bottle, mineral water bottle, fruit juice beverage bottle, cosmetic bottles, large diameter bottles, high temperature resistance bottles and other packaging bottles.</p>
+          <p>1. Stable and accurate running at high speed, adopt more stable and advanced microcomputer PLC control system.</p>
+          <p>2. Production process is fully automated, with the advantages of low investment, high efficiency, easy operation, simple maintenance and safety.</p>
+          <p>3. Suitable for flexible production of quantity and various bottle shape, wide range of applications, meet customer needs.</p>
+        `,
+        specs: [
+          ['Model', 'BG-4000 4 Cavities Full Automatic Water Bottles Manufacturing Machines'],
+          ['Theoretical output', '4500 pcs/h'],
+          ['Finished bottle', 'Max. bottle volume: 1.5 Liters'],
+          ['', 'Max. neck diameter: 38 mm'],
+          ['', 'Max. bottle diameter: 105mm'],
+          ['', 'Max. bottle height: 330 mm'],
+          ['Mold specifications', 'Cavity: 4'],
+          ['', 'Automatic Lubricating Oil System: Yes'],
+          ['', 'Mold thickness: 180mm-240 mm'],
+          ['', 'Open stroke: 130 mm'],
+          ['Electrical system', 'Power voltage: 380v/3Phase/50HZ'],
+          ['', 'Installation power: 40 kw'],
+          ['', 'Actual power consumption: 18kw'],
+          ['Air source', 'Recommend air compressor: 3.2 m³/min 30Kg, 1.6 m³/min 12Kg'],
+          ['Cooling water', 'Recommend water chiller: 5HP'],
+          ['Blower size', 'Length*width*height/weight: 3500*1500*2200 (MM)/3000 KG'],
+          ['Preform Loader size', 'Length*width*height/weight: 1750*960*2500 (MM)/550kg']
+        ]
+      },
+      '2': {
+        title: 'China Factory High Speed Lowest Price 6 Cavities PET Bottle Making Machines',
+        breadcrumb: 'SEMI AUTOMATIC MACHINE',
+        image: 'carbonated-detail1.jpg',
+        description: `
+          <p class="desc-text">
+            a stable two-step blow-down stretch automatic blowing machine. It can be used from 4 cavity to 12 cavity with a speed of 2000 bottles per hour (750 ml plastic bottles), max volume 2L plastic bottle, suitable for blowing any kind of carbonated beverage bottle, sparkling beverage bottle, pure water bottle, mineral water bottle, fruit juice beverage bottle, cosmetic bottles, large diameter bottles, high temperature resistance bottles and other packaging bottles.
+          </p>
+          <p class="desc-text">
+            6 Cavity Full Automatic Blow Moulding Machine, with production capacity at 6,000~7,000 bottles per hour, is suitable for large water production line. The PLC micro-computer controller and human machine interface create simple operation. Independent operation station, far from heating area, is more flexible, safe to arrange operating positions.
+          </p>
+          <img src="carbonated-baverage-bottle.jpg" alt="" class="product-main-image img">
+          <p class="caption-text">
+            Full auto blow moulding machine is suitable for producing PET plastic containers and bottles in all shapes. The blow moulding machine is widely used to produce the carbonated bottle, mineral water, pesticide bottle oil bottle cosmetics, wide-mouth bottle and hot fill bottle etc.
+          </p>
+          <div class="table-responsive-wrapper">
+            <table class="spec-table">
+              <tbody>
+                <tr class="header-row">
+                  <td class="category-cell">Item</td>
+                  <td class="param-cell" colspan="2">BG-6000</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="category-cell" rowspan="5">Bottle type specification</td>
+                  <td class="param-cell">Cavity</td>
+                  <td class="value-cell">6</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="param-cell">Max.volume</td>
+                  <td class="value-cell">2L</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">Bottle mouth maximum overall diameter</td>
+                  <td class="value-cell">28-30mm</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="param-cell">Bottle biggest diameter</td>
+                  <td class="value-cell">100mm</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">Bottle maximum height</td>
+                  <td class="value-cell">330mm</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="category-cell" rowspan="4">Capacity specification</td>
+                  <td class="param-cell">Theory output</td>
+                  <td class="value-cell">12000-14000 bph</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">Bottle type volume</td>
+                  <td class="value-cell">500ml</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="param-cell">Bottle type weight</td>
+                  <td class="value-cell">17g</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">Bottle type</td>
+                  <td class="value-cell">Round</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="category-cell" rowspan="5">Power specification</td>
+                  <td class="param-cell">Light tube quantity</td>
+                  <td class="value-cell">32pcs</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">Light tube power</td>
+                  <td class="value-cell">2KW/3KW</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="param-cell">Maximum heating power</td>
+                  <td class="value-cell">76KW</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">All electric machine installation</td>
+                  <td class="value-cell">98KW</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="param-cell">Actual consumption</td>
+                  <td class="value-cell">30%-60%</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="category-cell" rowspan="3">Air pressure specification</td>
+                  <td class="param-cell">Work pressure</td>
+                  <td class="value-cell">5-6kg/cm²</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="param-cell">Blow bottle pressure</td>
+                  <td class="value-cell">25-45kg/cm²</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">Higher -pressure gas consumption</td>
+                  <td class="value-cell">8000Ltr/min</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="category-cell" rowspan="4">Frozen water specification</td>
+                  <td class="param-cell">Work pressure</td>
+                  <td class="value-cell">5-6 kg/cm²</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">Temperature range</td>
+                  <td class="value-cell">10℃</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="param-cell">Consumption</td>
+                  <td class="value-cell">8000kcal/hr</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">Frozen water flow</td>
+                  <td class="value-cell">120L/min</td>
+                </tr>
+                <tr class="row-odd">
+                  <td class="category-cell" rowspan="2">Machine specification</td>
+                  <td class="param-cell">Machine size</td>
+                  <td class="value-cell">5.2x2.1x2.38</td>
+                </tr>
+                <tr class="row-even">
+                  <td class="param-cell">Machine weight</td>
+                  <td class="value-cell">8.5ton</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `,
+        specs: [
+          ['Model', 'BG-6000 6 Cavities Full Automatic PET Bottle Machine'],
+          ['Theoretical output', '7000 pcs/h'],
+          ['Finished bottle', 'Max. bottle volume: 2.0 Liters'],
+          ['', 'Max. neck diameter: 38 mm'],
+          ['', 'Max. bottle diameter: 110mm'],
+          ['', 'Max. bottle height: 340 mm'],
+          ['Mold specifications', 'Cavity: 6'],
+          ['', 'Automatic Lubricating Oil System: Yes'],
+          ['Electrical system', 'Power voltage: 380v/3Phase/50HZ'],
+          ['', 'Installation power: 60 kw'],
+          ['', 'Actual power consumption: 28kw']
+        ]
+      },
+      '3': {
+        title: 'BG2000 High Speed Fully Automatic Water Bottle Blowing Making',
+        breadcrumb: 'BOTTLE MOLD & PREFORM MOLD & CAP MOLD',
+        image: 'product3.jpg',
+        description: `
+          <p class="desc-text">
+            Suitable for all shapes of PET plastic bottles,widely used to produce the carbonated bottle, mineral water, pesticide bottle oil bottle cosmetics, wide-mouth bottle and hot fill bottle etc
+          </p>
+
+          <div class="space-y-1.5 mb-6 text-sm">
+            <div class="bullet-item">
+              <span class="check-mark">√√</span>
+              <span>Brand: Baoge Machinery-----Automatic Blowing Machine</span>
+            </div>
+            <div class="bullet-item">
+              <span class="check-mark">√√</span>
+              <span>Application: 0.2-2L</span>
+            </div>
+            <div class="bullet-item">
+              <span class="check-mark">√√</span>
+              <span>Capacity: 18000BPH</span>
+            </div>
+          </div>
+
+          <div class="table-responsive-wrapper">
+            <table class="spec-table">
+              <tbody>
+                <tr class="bg-light-grey">
+                  <td class="w-1/3 font-semibold-custom">Model</td>
+                  <td colspan="2" class="w-2/3">BG-2000</td>
+                </tr>
+                <tr class="bg-white-row">
+                  <td class="font-semibold-custom">Theoretical output</td>
+                  <td colspan="2">2500 pcs/h</td>
+                </tr>
+                <tr class="bg-light-grey">
+                  <td rowspan="4" class="font-semibold-custom align-middle">Finished bottle</td>
+                  <td class="w-1/3">Max. bottle volume</td>
+                  <td>1.5 Liters</td>
+                </tr>
+                <tr class="bg-white-row">
+                  <td>Max. neck diameter</td>
+                  <td>38 mm</td>
+                </tr>
+                <tr class="bg-light-grey">
+                  <td>Max. bottle diameter</td>
+                  <td>105mm</td>
+                </tr>
+                <tr class="bg-white-row">
+                  <td>Max. bottle height</td>
+                  <td>300 mm</td>
+                </tr>
+                <tr class="bg-light-grey">
+                  <td rowspan="4" class="font-semibold-custom align-middle">Mold specifications</td>
+                  <td>Cavity</td>
+                  <td>2</td>
+                </tr>
+                <tr class="bg-white-row">
+                  <td>Automatic Lubricating Oil System</td>
+                  <td>Yes</td>
+                </tr>
+                <tr class="bg-light-grey">
+                  <td>Mold thickness</td>
+                  <td>180mm-240 mm</td>
+                </tr>
+                <tr class="bg-white-row">
+                  <td>Open stroke</td>
+                  <td>110 mm</td>
+                </tr>
+                <tr class="bg-light-grey">
+                  <td rowspan="3" class="font-semibold-custom align-middle">Electrical system</td>
+                  <td>Power voltage</td>
+                  <td>380v/3Phase/50HZ</td>
+                </tr>
+                <tr class="bg-white-row">
+                  <td>Installation power</td>
+                  <td>30 kw</td>
+                </tr>
+                <tr class="bg-light-grey">
+                  <td>Actual power consumption</td>
+                  <td>13kw</td>
+                </tr>
+                <tr class="bg-white-row">
+                  <td class="font-semibold-custom">Air source</td>
+                  <td>Recommend air compressor</td>
+                  <td>2.4 m³/min 30Kg &nbsp;1.6 m³/min 12Kg</td>
+                </tr>
+                <tr class="bg-light-grey">
+                  <td class="font-semibold-custom">Cooling water</td>
+                  <td>Recommend water chiller</td>
+                  <td>5HP</td>
+                </tr>
+                <tr class="bg-white-row">
+                  <td class="font-semibold-custom">Blower size</td>
+                  <td>Length*width*height/weight</td>
+                  <td>3500*1800*2000 (MM)/3000 KG</td>
+                </tr>
+                <tr class="bg-light-grey">
+                  <td class="font-semibold-custom">Preform Loader size</td>
+                  <td>Length*width*height/weight</td>
+                  <td>1750*960*2500 (MM)/550kg</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `,
+        specs: [
+          ['Model', 'BG-2000 High Speed Fully Automatic'],
+          ['Theoretical output', '2000 pcs/h'],
+          ['Finished bottle', 'Max. bottle volume: 1.0 Liters'],
+          ['Mold specifications', 'Cavity: 2'],
+          ['Electrical system', 'Power voltage: 380v/3Phase/50HZ'],
+          ['', 'Installation power: 30 kw']
+        ]
+      },
+     '4': {
+  title: 'BG-2000 2Cavities Fully Automatic Plastic Spring Water Bottle blow Molding',
+  breadcrumb: 'BLOWING MACHINE AUXILIARY EQUIPMENTS',
+  image: 'daily-chemistry1.jpg',
+  description: `
+    <p class="desc-text">
+      Full Automatic 2 Cavities Pet Stretch Blow Molding Machine for Various Kinds of Water Bottles 50ml-500ml PLC Core Components
+    </p>
+
+    <p class="desc-text">
+      BAOGE is a factory specialized in making the PET plastic containers and bottles in all shapes. It is widely used to produce the carbonated bottle, mineral water, pesticide bottle oil bottle cosmetics, wide-mouth bottle and hot fill bottle etc. Beverage bottle, cosmetic bottle, medicine bottle, jar etc.
+    </p>
+
+    <p class="desc-text">
+      We have many many types of the machine, with automatic, manual and semi automatics.
+    </p>
+
+    <div class="table-responsive-wrapper">
+      <table class="spec-table">
+        <tbody>
+          <tr style="background:#f8fafc;">
+            <td style="width:35%; font-weight:600;">Model</td>
+            <td colspan="2">BG-2000</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Theoretical output</td>
+            <td colspan="2">2500 pcs/h</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td rowspan="4" style="font-weight:600; vertical-align:middle;">Finished bottle</td>
+            <td style="width:30%;">Max. bottle volume</td>
+            <td>1.5 Liters</td>
+          </tr>
+          <tr>
+            <td>Max. neck diameter</td>
+            <td>38 mm</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td>Max. bottle diameter</td>
+            <td>105mm</td>
+          </tr>
+          <tr>
+            <td>Max. bottle height</td>
+            <td>300 mm</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td rowspan="4" style="font-weight:600; vertical-align:middle;">Mold specifications</td>
+            <td>Cavity</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Automatic Lubricating Oil System</td>
+            <td>Yes</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td>Mold thickness</td>
+            <td>180mm-240 mm</td>
+          </tr>
+          <tr>
+            <td>Open stroke</td>
+            <td>110 mm</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td rowspan="3" style="font-weight:600; vertical-align:middle;">Electrical system</td>
+            <td>Power voltage</td>
+            <td>380v/3Phase/50HZ</td>
+          </tr>
+          <tr>
+            <td>Installation power</td>
+            <td>30 kw</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td>Actual power consumption</td>
+            <td>13kw</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Air source</td>
+            <td>Recommend air compressor</td>
+            <td>2.4 m³/min 30Kg &nbsp;1.6 m³/min 12Kg</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td style="font-weight:600;">Cooling water</td>
+            <td>Recommend water chiller</td>
+            <td>5HP</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Blower size</td>
+            <td>Length*width*height/weight</td>
+            <td>3500*1800*2000 (MM)/3000 KG</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td style="font-weight:600;">Preform Loader size</td>
+            <td>Length*width*height/weight</td>
+            <td>1750*960*2500 (MM)/550kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: [
+    ['Model', 'BG-2000 2 Cavities Fully Automatic'],
+    ['Theoretical output', '2000 pcs/h'],
+    ['Finished bottle', 'Max. bottle volume: 2.0 Liters'],
+    ['Mold specifications', 'Cavity: 2'],
+    ['Electrical system', 'Power voltage: 380v/3Phase/50HZ'],
+    ['', 'Installation power: 30 kw']
+  ]
+},
+'5': {
+  title: 'Fully Automatic PET plastic Blowing Machine Stretch 500ML Bottle Making Machine',
+  breadcrumb: 'PREFORM & CAP & HANDLE',
+  image: 'product6.jpg',
+  description: `
+    <p class="desc-text">
+      PET blowing machine for 2l linear bottle blowing machines are used in the production of PET water bottles, hot filling bottles, carbonated beverage bottles, edible oil bottles, and pesticide bottles.
+    </p>
+
+    <p class="desc-text">
+      Baoge Machinery's linear bottle blowing machine stretches preforms by using a servo motor-controlled stretch rod. The advantage is that it can be stretched in sections, and positioning of the preform is at first in order to ensure the verticality of the preforms during stretching, then secondary stretching.
+    </p>
+
+    <p class="desc-text">
+      Ensure the uniformity and consistency of each preform stretching. At the same time, bottle blowing machine has a fast stretching speed and precise position.
+    </p>
+
+    <!-- Machine Image 1 -->
+    <img 
+      src="product-fully-automatic5.jpg" 
+      alt="Fully Automatic PET Blowing Machine" 
+      class="product-detail-img"
+      onerror="this.src='https://via.placeholder.com/800x500/1e293b/ffffff?text=Blowing+Machine'"
+    >
+
+    <!-- Video Section -->
+    <div class="product-video-wrapper">
+      <video controls preload="metadata" poster="pet-blowing-machine-orange.jpg">
+        <source src="pet-blowing-machine-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Features of Main Body -->
+    <h3 class="text-lg font-bold text-gray-800 mt-6 mb-3">Features of main body :</h3>
+    <ol class="space-y-2 text-base text-gray-700 leading-relaxed" style="list-style: none; padding-left: 0;">
+      <li>1). Stable performance with advanced PLC.</li>
+      <li>2). Automatic preform conveyer to save human cost.</li>
+      <li>3). Preform self-rotation and infrared pre-heater revolution assure the even distribution of heat, which improve the bottle shaping rate, increase the production.</li>
+      <li>4). High adjusting performance to enable preheat the preforms perfectly by adjust the voltage control area in the PLC, which could adjust the temperature of the infrared lights in the pre-heater, and keep the proper temperature and humidity invariable.</li>
+      <li>5). High safeties with security automatic-locking device in each mechanical action, which will make the production into a perfect safe environment, in case of the breakdown in certain procedure.</li>
+      <li>6). Introduce the FESTO air cylinder to avoid contamination and noise.</li>
+      <li>7). Satisfaction with different atmospheric pressure for blowing and mechanical action by dividing the blowing and action into three parts in the air pressure diagram of the machine.</li>
+      <li>8). Strong clamping force with high pressure and double crank links to lock the mould.</li>
+      <li>9). Two ways of operating: automatic and manual.</li>
+      <li>10). Low cost, high efficiency, easy operation and maintenance etc, profited from the fully automatic technological process.</li>
+      <li>11). Ideal cooling system make the finished bottles without any flaws.</li>
+    </ol>
+
+    <!-- Machine Image 2 (Bottles) -->
+    <img 
+      src="product-fully-automatic5-2.jpg" 
+      alt="PET Bottles Produced" 
+      class="product-detail-img"
+      onerror="this.src='https://via.placeholder.com/800x500/1e293b/ffffff?text=PET+Bottles'"
+    >
+
+    <!-- Servo Transmission System -->
+    <h3 class="text-base font-bold text-gray-800 mt-6 mb-2">Servo transmission system</h3>
+    <p class="desc-text">
+      High positioning accuracy, fast speed and stability, good reliability. Gas circuit design will divide action and blowing into three parts to meet the needs of different pressure for blowing bottles and movement; Adopt high pressure and double crank arm link locking, strong clamping force.
+    </p>
+
+    <!-- Adopt Infrared Lamp Heating -->
+    <h3 class="text-base font-bold text-gray-800 mt-6 mb-2">Adopt infrared lamp heating</h3>
+    <p class="desc-text">
+      Adopt infrared lamp heating, strong penetration, preform rotation heating, track revolution, heating evenly, fast and reliable; Heating lamp, reflector width and height can be adjusted to suit preform heating of different structure, with automatic temperature-removal device to ensure the constant temperature of oven.
+    </p>
+
+    <!-- Auto-Loader -->
+    <h3 class="text-base font-bold text-gray-800 mt-6 mb-2">Auto-loader</h3>
+    <p class="desc-text">
+      Auto-loader improves working efficiency, accurate transportation, reliable and durable, raw materials are completely free of moisture, pollution, foreign matter, and loss during feeding process. Realize transportation process of feeding process, avoid danger of high-altitude feeding, reduce labor intensity and increase production efficiency.
+    </p>
+
+    <!-- Intelligent HMI -->
+    <h3 class="text-base font-bold text-gray-800 mt-6 mb-2">Intelligent Human-Machine Interface</h3>
+    <p class="desc-text">
+      1. Human-machine interface control, easy operate and monitor.<br>
+      2. Live production information supervise, auto record production data everyday.
+    </p>
+
+    <!-- Responsive Table -->
+    <div class="table-responsive-wrapper">
+      <table class="spec-table">
+        <tbody>
+          <tr style="background:#f8fafc;">
+            <td style="width:35%; font-weight:600;">Model</td>
+            <td colspan="2">BG-4000 4 Cavities Full Automatic Water Bottles Manufacturing Machines</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Theoretical output</td>
+            <td colspan="2">4500 pcs/h</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td rowspan="4" style="font-weight:600; vertical-align:middle;">Finished bottle</td>
+            <td style="width:30%;">Max. bottle volume</td>
+            <td>1.5 Liters</td>
+          </tr>
+          <tr>
+            <td>Max. neck diameter</td>
+            <td>38 mm</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td>Max. bottle diameter</td>
+            <td>105mm</td>
+          </tr>
+          <tr>
+            <td>Max. bottle height</td>
+            <td>330 mm</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td rowspan="4" style="font-weight:600; vertical-align:middle;">Mold specifications</td>
+            <td>Cavity</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>Automatic Lubricating Oil System</td>
+            <td>Yes</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td>Mold thickness</td>
+            <td>180mm-240 mm</td>
+          </tr>
+          <tr>
+            <td>Open stroke</td>
+            <td>130 mm</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td rowspan="3" style="font-weight:600; vertical-align:middle;">Electrical system</td>
+            <td>Power voltage</td>
+            <td>380v/3Phase/50HZ</td>
+          </tr>
+          <tr>
+            <td>Installation power</td>
+            <td>40 kw</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td>Actual power consumption</td>
+            <td>18kw</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Air source</td>
+            <td>Recommend air compressor</td>
+            <td>3.2 m³/min 30Kg &nbsp;1.6 m³/min 12Kg</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td style="font-weight:600;">Cooling water</td>
+            <td>Recommend water chiller</td>
+            <td>5HP</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Blower size</td>
+            <td>Length*width*height/weight</td>
+            <td>3500*1500*2200 (MM)/3000 KG</td>
+          </tr>
+          <tr style="background:#f8fafc;">
+            <td style="font-weight:600;">Preform Loader size</td>
+            <td>Length*width*height/weight</td>
+            <td>1750*960*2500 (MM)/550kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: [
+    ['Model', 'BG-1000 Fully Automatic PET Blowing Machine'],
+    ['Theoretical output', '1500 pcs/h'],
+    ['Finished bottle', 'Max. bottle volume: 2.0 Liters'],
+    ['Mold specifications', 'Cavity: 2'],
+    ['Electrical system', 'Power voltage: 380v/3Phase/50HZ'],
+    ['', 'Installation power: 25 kw']
+  ]
+},
+
+
+    // ========== SEMI AUTOMATIC (New) ==========
+  'sa-1': {
+  title: 'Low Price 2 cavity Semi Automatic Plastic Bottle Making Machine Pet Blowing Machine',
+  breadcrumb: 'SEMI AUTOMATIC MACHINE',
+  image: 'semi-automatic3.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      0-1-1-5L PET blow moulding machine has a plenty of assistant units to increase the machine's performance such as air storage unit to keep the air pressure stable grease-lubricating unit to reduce mechanical parts' wear and tear and multi-utilization air entry unit to meet air compressed air high-pressure single entry mode and high-pressure & low-pressure double entry mode.
+    </p>
+
+    <h3 style="font-size: 15px; font-weight: 700; color: #111; margin: 20px 0 10px 0;">
+      1. Introduction:
+    </h3>
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      pet bottle blow moulding machine price is suitable for producing PET/PE and PP plastic containers and bottles in all shapes. It is widely used to produce the carbonated bottle, mineral water, pesticide bottle Oil bottle cosmetics, wide-mouth bottle and hot fill bottle etc.
+    </p>
+
+    <h3 style="font-size: 15px; font-weight: 700; color: #111; margin: 20px 0 10px 0;">
+      2. Our advantage:
+    </h3>
+    <ol style="font-size: 14px; color: #555; line-height: 1.8; padding-left: 20px; margin-bottom: 20px;">
+      <li>1) High safety. High speed with high efficiency.</li>
+      <li>2) Manual saving, one man is enough for operation the machine.</li>
+      <li>3) Stable performing with easy maintaining.</li>
+      <li>4) Imported PLC controlling and man-machine interface computer.</li>
+      <li>5) Japan Omron inspection sensor.</li>
+      <li>6) Adopt the new type double bend arm and the four rod-clamping structure(won the patent). Cross direction; Middle mould board is move parallel; The distance between two mold board is adjusted by the chain wheel. Thus, the clamping force is very strong.</li>
+      <li>7) Power saving design that can increase your profits.</li>
+      <li>8) Segregate type air controlling system, which is designed for avoiding waste pollution.</li>
+      <li>9) Perfet after-sale service. We can offer you spare parts for free at the first year.</li>
+    </ol>
+
+    <!-- Machine Image -->
+    <img 
+      src="semi-automatic1.jpg" 
+      alt="Semi Automatic Blowing Machine Row" 
+      class="detail-image-responsive"
+      style="width: 100%; max-width: 100%; height: auto; max-height: 450px; object-fit: contain; display: block; margin: 16px 0; border-radius: 8px; background: #f8f9fa; padding: 8px; box-sizing: border-box;"
+      onerror="this.src='https://via.placeholder.com/800x500/004b93/ffffff?text=Semi+Automatic+Machine+Row'"
+    >
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f8fafc;">
+            <td style="width: 30%; font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Model</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">BG-880 Easy Operating Automatic 300ML 600ML 1500ML Plastic Bottle Blowing Molding Machine , PET Bottle Making Machine price</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Theoretical output</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">800-1000 pcs/h</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="4" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Finished bottle</td>
+            <td style="width: 30%; padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle volume</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">6 Liters</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. neck diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">250 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">350mm</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle height</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">380mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="4" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Mold specifications</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Cavity</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">28mm-95mm neck size with 2 cavity</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Cavity</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">95mm-250mm neck size with 1 cavity</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Mold thickness</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">110mm-400mm</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Open stroke</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">420 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="3" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Electrical system</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Power voltage</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">380v/3Phase/50HZ</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Installation power</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">14kw</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Actual power consumption</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">5-8 kw</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Air source</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend air compressor</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1.2m³/min 30Kg</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Cooling water</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend water chiller</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">3HP</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Blower size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1600*730*1860mm/650kg</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Oven size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1400*620*1400mm/350kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+'sa-2': {
+  title: '10L To 20L Power Saving Easy Operating Water Bottle Plastic Blowing Blow Moulding',
+  breadcrumb: 'SEMI AUTOMATIC MACHINE',
+  image: 'semi-automatic2.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      10liter big tank pet stretch bottle blow moulding machine price/mineral water bottle making machines
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      PET Bottle Making Machine is suitable for producing PET plastic containers and bottles in all shapes. It is widely used to produce the carbonated bottle, mineral water, pesticide bottle oil bottle cosmetics, wide-mouth bottle and hot fill bottle etc. Beverage bottle, cosmetic bottle, medicine bottle, jar etc.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      MT-A series Semi Automatic Stretch Blow Molding Machine, including one blower and one heater, used for the series kinds of PET bottle, such as the edible oil bottle,medicinal bottle, drinking bottle, cosmetic jars, Wild-mouth bottle and so on.
+    </p>
+
+    <h3 style="font-size: 15px; font-weight: 700; color: #111; margin: 20px 0 10px 0;">
+      1. Introduction:
+    </h3>
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      pet bottle blow moulding machine price is suitable for producing PET/PE and PP plastic containers and bottles in all shapes. It is widely used to produce the carbonated bottle, mineral water, pesticide bottle Oil bottle cosmetics, wide-mouth bottle and hot fill bottle etc.
+    </p>
+
+    <h3 style="font-size: 15px; font-weight: 700; color: #111; margin: 20px 0 10px 0;">
+      2. Our advantage:
+    </h3>
+    <ol style="font-size: 14px; color: #555; line-height: 1.8; padding-left: 20px; margin-bottom: 20px;">
+      <li>1) High safety. High speed with high efficiency.</li>
+      <li>2) Manual saving, one man is enough for operation the machine.</li>
+      <li>3) Stable performing with easy maintaining.</li>
+      <li>4) Imported PLC controlling and man-machine interface computer.</li>
+      <li>5) Japan Omron inspection sensor.</li>
+      <li>6) Adopt the new type double bend arm and the four rod-clamping structure(won the patent). Cross direction; Middle mould board is move parallel; The distance between two mold board is adjusted by the chain wheel. Thus, the clamping force is very strong.</li>
+      <li>7) Power saving design that can increase your profits.</li>
+      <li>8) Segregate type air controlling system, which is designed for avoiding waste pollution.</li>
+      <li>9) Perfet after-sale service. We can offer you spare parts for free at the first year.</li>
+    </ol>
+
+    <!-- Machine Image -->
+    <img 
+      src="semi-automatic 2-2.jpg" 
+      alt="10L to 20L Semi Automatic Blowing Machine" 
+      class="detail-image-responsive"
+      style="width: 100%; max-width: 100%; height: auto; max-height: 450px; object-fit: contain; display: block; margin: 16px 0; border-radius: 8px; background: #f8f9fa; padding: 8px; box-sizing: border-box;"
+      onerror="this.src='https://via.placeholder.com/800x500/004b93/ffffff?text=Semi+Automatic+10L-20L'"
+    >
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f8fafc;">
+            <td style="width: 30%; font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Model</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">BG-100 Economic Power Taizhou Baoge BG-100 18.9L PET Blow Molding Blow Moulding Plastic Blowing Machines</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Theoretical output</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">120 pcs/h</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="4" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Finished bottle</td>
+            <td style="width: 30%; padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle volume</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">25 Liters</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. neck diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">65 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">380 mm</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle height</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">600 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="3" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Mold specifications</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Cavity</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1 cavity</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Mold thickness</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">190mm-350mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Open stroke</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">500 mm</td>
+          </tr>
+          <tr>
+            <td rowspan="3" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Electrical system</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Power voltage</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">380v/3Phase/50HZ</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Installation power</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">42 kw</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Actual power consumption</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">22 kw</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Air source</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend air compressor</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1.2m³/min 30Kg</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Cooling water</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend water chiller</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">5HP</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Blower size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">2290*770*1900(MM) / 1200 kg</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Oven size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">2750*690*1700(MM)/ 300 kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+'sa-3': {
+  title: 'Making 38mm Drinking Bottle Plastic PET Preform Blowing Moulding Machine',
+  breadcrumb: 'SEMI AUTOMATIC MACHINE',
+  image: 'semi-automatic3.jpg',
+  description: `
+    <ol style="font-size: 14px; color: #555; line-height: 1.8; padding-left: 20px; margin-bottom: 20px;">
+      <li>1. Produce bottle from 0.1L to 3L</li>
+      <li>2. Output capacity up to 900 for 0.6L using two-cavity blow mold</li>
+      <li>3. Advanced PLC control system with a use-friendly panel and time-control precision of PLC up to 0.01second</li>
+      <li>4. Equipped with special designed air storage unit</li>
+      <li>5. Using Infrared preform heater</li>
+      <li>6. Independent Temperature Control for different heating lamp to get ideal preform heating results</li>
+      <li>7. Heating lamps are adjustable in directions to suit various preforms.</li>
+      <li>8. Operated only by one person without special training.</li>
+      <li>9. Simple installation &amp; startup adjustment. 10. Waste rate of finished bottle is less than 0.2%.</li>
+    </ol>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Blowing 0.1-3 liter PET ordinary bottles, PET hot filling bottles, BOPP high-temperature bottles (one out of four) using four mold cavity abrasive tools to blow 600 ml bottles, the output can be as large as 3000 per hour, advanced PLC control system, time control can be accurate to 0.01 seconds, special air storage device, using infrared lamp heating, strong penetration, preform rotation and heating, orbital revolution, uniform heating, fast and reliable
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Different heating lamps are equipped with independent temperature control devices to ensure that the preforms have the ideal heating effect. The direction of the heating lamps can be adjusted according to different preforms. Only one person is required, and no special training is required.
+    </p>
+
+    <!-- Machine Image -->
+    <img 
+      src="semi-automatic1.jpg" 
+      alt="38mm Drinking Bottle Semi Automatic Blowing Machine" 
+      class="detail-image-responsive"
+      style="width: 100%; max-width: 100%; height: auto; max-height: 450px; object-fit: contain; display: block; margin: 16px 0; border-radius: 8px; background: #f8f9fa; padding: 8px; box-sizing: border-box;"
+      onerror="this.src='https://via.placeholder.com/800x500/004b93/ffffff?text=Semi+Automatic+38mm'"
+    >
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f8fafc;">
+            <td style="width: 35%; font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">ITEM</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">3L 2 cavity semi-automatic bottle blowing machine</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Clamping force</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">13T</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Clamping stroke</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">330mm</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Max.stretching stroke</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">440mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Number of cavities</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">0.1-3L 2cavity</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Theoretical output</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">0.5-2.5L:800-1500bph</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Max.mould thickness</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">280mm</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Mould plate size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">490x470mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Voltage standard</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">380v/3PH/50Hzorspecial order</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Total power(full loaded)</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">3-10KW 5-15KW</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Min.air compressor</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1.2mm3/min3.0Mpa</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Blow molding machine</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">175x60x180cm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Pre - heater</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">150x70x140cm</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Net weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">0.75T</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Container volume</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">0.5-2.5L</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Neck diameter range</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">28-100mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Container diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">150mm</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Container height</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">450mm</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+  
+'sa-4': {
+  title: 'Plastic PET Sanitizer Gel Spray Hand Sanitizer Bottles Packaging Making Machine',
+  breadcrumb: 'SEMI AUTOMATIC MACHINE',
+  image: 'semi-automatic4.jpg',
+  description: `
+    <ul style="font-size: 14px; color: #555; line-height: 1.8; padding-left: 20px; margin-bottom: 20px; list-style: none;">
+      <li style="margin-bottom: 12px;">&bull; Adopting double crank to adjust mould, heavy locking mould, stable and fast, Adopt infrared oven to heat the perform,the perform rotated and heated equally.</li>
+      <li style="margin-bottom: 12px;">&bull; The air system has been divided into two parts: pneumatic action part and bottle blow part to meet the different requirements for the action and blow. It can provide sufficient and steady high pressure for blowing large irregular shaped bottles.</li>
+      <li style="margin-bottom: 12px;">&bull; The machine is also equipped with muffler and oiling system to lubricate the mechanical part of the machine.</li>
+      <li style="margin-bottom: 12px;">&bull; The machine can be operated in the step-by-step mode and the semi-auto mode.</li>
+      <li style="margin-bottom: 12px;">&bull; The machine is small with low investment, easy and safe to operate.</li>
+    </ul>
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f8fafc;">
+            <td style="width: 30%; font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Model</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">BG-2000B Plastic PET Sanitizer Gel Spray Hand Sanitizer Bottles Packaging Making Machine</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Theoretical output</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">2200 pcs/h</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="4" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Finished bottle</td>
+            <td style="width: 30%; padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle volume</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1500 ml</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. neck diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">38 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">130 mm</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle height</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">320 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="3" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Mold specifications</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Cavity</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">4 cavity</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Mold thickness</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">110mm-200mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Open stroke</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">300 mm</td>
+          </tr>
+          <tr>
+            <td rowspan="3" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Electrical system</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Power voltage</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">380v/3Phase/50HZ</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Installation power</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">35 kw</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Actual power consumption</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">15 kw</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Air source</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend air compressor</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1.2m³/min 30Kg</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Cooling water</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend water chiller</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">5HP</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Blower size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1800*820*1900 (MM) / 850 kg</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Oven size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1800*580*1360 (MM) / 450 kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Machine Images Grid -->
+    <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 16px;">
+      <!-- Big Image (Left) -->
+      <img 
+        src="semi-automatic4-2.jpg" 
+        alt="Sanitizer Bottle Blowing Machine" 
+        class="detail-image-responsive"
+        style="width: 100%; max-width: 100%; height: auto; max-height: 400px; object-fit: contain; display: block; border-radius: 8px; background: #f8f9fa; padding: 8px; box-sizing: border-box;"
+        onerror="this.src='https://via.placeholder.com/800x500/004b93/ffffff?text=Sanitizer+Machine'"
+      >
+      
+      <!-- Two Small Images Side by Side -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <img 
+          src="semi-automatic-sanitizer-2.jpg" 
+          alt="Heating Unit Close-up" 
+          class="detail-image-responsive"
+          style="width: 100%; max-width: 100%; height: auto; max-height: 300px; object-fit: contain; display: block; border-radius: 8px; background: #f8f9fa; padding: 8px; box-sizing: border-box;"
+          onerror="this.src='https://via.placeholder.com/400x400/004b93/ffffff?text=Heating+Unit'"
+        >
+        <img 
+          src="semi-automatic4-2.jpg" 
+          alt="Bottle Molds Close-up" 
+          class="detail-image-responsive"
+          style="width: 100%; max-width: 100%; height: auto; max-height: 300px; object-fit: contain; display: block; border-radius: 8px; background: #f8f9fa; padding: 8px; box-sizing: border-box;"
+          onerror="this.src='https://via.placeholder.com/400x400/004b93/ffffff?text=Bottle+Molds'"
+        >
+      </div>
+    </div>
+  `,
+  specs: []
+},
+  
+'sa-5': {
+  title: 'Semi Automatic 2 cavity Souffleuse Bouteille Plastique PET Hand Sanitizer Bottle Blowing Making Machine',
+  breadcrumb: 'SEMI AUTOMATIC MACHINE',
+  image: 'semi-automatic5.jpg',
+  description: `
+    <ul style="font-size: 14px; color: #555; line-height: 1.8; padding-left: 20px; margin-bottom: 20px; list-style: none;">
+      <li style="margin-bottom: 12px;">&bull; Adopting double crank to adjust mould, heavy locking mould, stable and fast, Adopt infrared oven to heat the perform,the perform rotated and heated equally.</li>
+      <li style="margin-bottom: 12px;">&bull; The air system has been divided into two parts: pneumatic action part and bottle blow part to meet the different requirements for the action and blow. It can provide sufficient and steady high pressure for blowing large irregular shaped bottles.</li>
+      <li style="margin-bottom: 12px;">&bull; The machine is also equipped with muffler and oiling system to lubricate the mechanical part of the machine.</li>
+      <li style="margin-bottom: 12px;">&bull; The machine can be operated in the step-by-step mode and the semi-auto mode.</li>
+      <li style="margin-bottom: 12px;">&bull; The machine is small with low investment, easy and safe to operate.</li>
+    </ul>
+
+    <h3 style="font-size: 15px; font-weight: 700; color: #111; margin: 20px 0 10px 0;">
+      Introduction:
+    </h3>
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      pet bottle blow moulding machine price is suitable for producing PET/PE and PP plastic containers and bottles in all shapes. It is widely used to produce the carbonated bottle, mineral water, pesticide bottle Oil bottle cosmetics, wide-mouth bottle and hot fill bottle etc.
+    </p>
+
+    <h3 style="font-size: 15px; font-weight: 700; color: #111; margin: 20px 0 10px 0;">
+      2. Our advantage:
+    </h3>
+    <ol style="font-size: 14px; color: #555; line-height: 1.8; padding-left: 20px; margin-bottom: 20px;">
+      <li>1) High safety. High speed with high efficiency.</li>
+      <li>2) Manual saving, one man is enough for operation the machine.</li>
+      <li>3) Stable performing with easy maintaining.</li>
+      <li>4) Imported PLC controlling and man-machine interface computer.</li>
+      <li>5) Japan Omron inspection sensor.</li>
+      <li>6) Adopt the new type double bend arm and the four rod-clamping structure(won the patent). Cross direction; Middle mould board is move parallel; The distance between two mold board is adjusted by the chain wheel. Thus, the clamping force is very strong.</li>
+      <li>7) Power saving design that can increase your profits.</li>
+      <li>8) Segregate type air controlling system, which is designed for avoiding waste pollution.</li>
+      <li>9) Perfet after-sale service. We can offer you spare parts for free at the first year.</li>
+    </ol>
+
+    <!-- Machine Image -->
+    <img 
+      src="semi-automatic1.jpg" 
+      alt="Semi Automatic Hand Sanitizer Bottle Blowing Machine" 
+      class="detail-image-responsive"
+      style="width: 100%; max-width: 100%; height: auto; max-height: 450px; object-fit: contain; display: block; margin: 16px 0; border-radius: 8px; background: #f8f9fa; padding: 8px; box-sizing: border-box;"
+      onerror="this.src='https://via.placeholder.com/800x500/004b93/ffffff?text=Semi+Automatic+Sanitizer'"
+    >
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f8fafc;">
+            <td style="width: 30%; font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Model</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">BG-880 Semi Automatic 2 cavity Souffleuse Bouteille Plastique PET Hand Sanitizer Bottle Blowing Making Machine</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Theoretical output</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">800-1000 pcs/h</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="4" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Finished bottle</td>
+            <td style="width: 30%; padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle volume</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">6 Liters</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. neck diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">250 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">350mm</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle height</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">380mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="4" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Mold specifications</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Cavity</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">28mm-95mm neck size with 2 cavity</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Cavity</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">95mm-250mm neck size with 1 cavity</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Mold thickness</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">110mm-400mm</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Open stroke</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">420 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="3" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Electrical system</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Power voltage</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">380v/3Phase/50HZ</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Installation power</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">14kw</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Actual power consumption</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">5-8 kw</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Air source</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend air compressor</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1.2m³/min 30Kg</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Cooling water</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend water chiller</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">3HP</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Blower size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1600*730*1860mm/650kg</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Oven size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1400*620*1400mm/350kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+  
+  'sa-6': {
+  title: 'High Production 600ML 1000ML 1500ML Semi Automatic Plastic PET Water Bottle Machine',
+  breadcrumb: 'SEMI AUTOMATIC MACHINE',
+  image: 'semi-automatic6.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      600-800BPH Two cavity semiautomatic bottle blow molding machine can produce two plastic bottle once. It is very mature PET bottle making machine. It is widely used to produce 100-2000ml carbonated bottle, mineral water, pesticide bottle oil bottle cosmetics, wide-mouth bottle etc. Volume of product:0.1L-2L Production capacity:600-800 psc/hour Adopting double crank to adjust mould,heavy locking mould, stable and fast,Adopt infrared oven to heat the perform ,the perform rotated and heated equally.
+    </p>
+
+    <!-- Machine Image -->
+    <img 
+      src="semi-automatic6-2.jpg" 
+      alt="High Production Semi Automatic PET Water Bottle Machine" 
+      class="detail-image-responsive"
+      style="width: 100%; max-width: 100%; height: auto; max-height: 450px; object-fit: contain; display: block; margin: 16px 0; border-radius: 8px; background: #f8f9fa; padding: 8px; box-sizing: border-box;"
+      onerror="this.src='https://via.placeholder.com/800x500/004b93/ffffff?text=Semi+Automatic+Water+Bottle'"
+    >
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f8fafc;">
+            <td style="width: 30%; font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Model</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">BG-2000A High Quality 800ML 3500ML 5000ML Semi Automatic Pet Blow Mach 5 Liter Bottle Blow Moulding Machine Mineral Water Bottle Machine</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Theoretical output</td>
+            <td colspan="2" style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1800-2200 pcs/h</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="4" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Finished bottle</td>
+            <td style="width: 30%; padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle volume</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1.5 Liters</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. neck diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">38 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle diameter</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">110 mm</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Max. bottle height</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">350 mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td rowspan="3" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Mold specifications</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Cavity</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">4 cavity</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Mold thickness</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">110mm-160mm</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Open stroke</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">320 mm</td>
+          </tr>
+          <tr>
+            <td rowspan="3" style="font-weight: 600; vertical-align: middle; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Electrical system</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Power voltage</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">380v/3Phase/50HZ</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Installation power</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">28 kw</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Actual power consumption</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">13 kw</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Air source</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend air compressor</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1.2m³/min 30Kg</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Cooling water</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Recommend water chiller</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">3HP</td>
+          </tr>
+          <tr style="background: #f8fafc;">
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Blower size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">1600*800*1850(MM) / 1200 kg</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 10px 12px; border: 1px solid #e2e8f0; color: #1e293b;">Oven size</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">Length*width*height/weight</td>
+            <td style="padding: 10px 12px; border: 1px solid #e2e8f0; color: #334155;">2260*560*1480mm(MM) / 300 kg</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+  
+  // ========== BOTTLE MOLD & PREFORM MOLD (9 Products) ==========
+
+// ===== bp-1: High precision 8cavity... =====
+'bp-1': {
+  title: 'High precision 8cavity 12cavity 16cavity 24cavity wide mouth Jar preform mold',
+  breadcrumb: 'BOTTLE MOLD & PREFORM MOLD',
+  image: 'pet-bottle1.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      1.We are one of the most reliable companies in this domain offering PET Preform Mould with advanced mould design technology.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Multicavity: 1-8 cavity, 12 cavity, 16 cavity, 24 cavity, 32 cavity, 48 cavity, 56 cavity, 72 cavity and 96 cavity.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Neck finish:PCO, 1810,1881,30/25,29/25,38 ,ALASK, ROPP; Jar neck and others.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      <strong style="font-weight: 700; color: #333;">COOLING SYSTEM</strong>
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      spiral water cooling way on cavity enhances mold cooling.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      cooling system on neck and move neck plates brings an enhance cooling.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      precise distributary plate distributes cooling water into cavity evenly,quicken preform cooling.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      <strong style="font-weight: 700; color: #333;">HOT RUNNER</strong>
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      hot runner balance design ensures evenly force,uniform heating and identical preform.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      less energy cost and pressure lost.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      independent cavity control system ensures nozzle temperature fluctuates within 1 .Adopt imported heating devices,Germany Hotset or Italy Rotfil.
+    </p>
+  `,
+  specs: []
+},
+// ===== bp-2: 24 Cavities Pet Jar Preform Mould =====
+'bp-2': {
+  title: '24 Cavities Pet Jar Preform Mould for Candy Jar',
+  breadcrumb: 'BOTTLE MOLD & PREFORM MOLD',
+  image: 'pet-bottle2.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Salient features of our molds are:
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Optimised Preform design of molds to ensure dynamic results in bottle blowing Preform molds with valve gate Hot Runner system Manufactured in modular concept for standard interchangeable mold components for ease of replacement. Variation in Preform wall thickness of ±0.10mm, depending on its length Machining tolerances of the order of 0.005mm (5 microns) A well-balanced cooling channel layout and turbulent water flow for consistency in cooling and efficient heat transfer Application of internationally advanced two-step dual taper locating technology Independent self-locking of each cavity to ensure high concentricity of product
+    </p>
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f0f0f0;">
+            <td style="width: 35%; font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Name</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">Jar Preform Mould</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Raw Material</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">PET, PP</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Cavity No.</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">4, 6, 8, 12, 16, 24, 32, 48, 64, 72, 96, etc.</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Injection Gate</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">Hot Runner Valve Gate</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Guarantee Time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">5 Million Shots</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Eject way</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">Eject Plate or Robot</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Core&Cavity</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">S136 (HRC46-48)</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Base</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">P20</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Delivery Time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">60 Working Days</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Feature</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">With Interchangeable Insert and Integral Cooling Channel</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+// ===== bp-3: 6 cavities PET Jar Preform =====
+'bp-3': {
+  title: '6 cavities PET Jar Preform Injection Mold',
+  breadcrumb: 'BOTTLE MOLD & PREFORM MOLD',
+  image: 'pet-bottle3.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      <strong style="font-weight: 700; color: #333;">High-Quality Material:</strong> Our 6 cavities Hot Runner Valve Gate PET Jar Preform Injection Mould is made from durable S136 steel, ensuring a long-lasting and reliable performance.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      <strong style="font-weight: 700; color: #333;">Multi-Cavity Design:</strong> This mould features a multi-cavity design, allowing for efficient production of six preforms at once, increasing productivity and reducing production time.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      <strong style="font-weight: 700; color: #333;">Free 3D Design Service:</strong> We offer a complimentary 3D drawing design service, ensuring that your product meets your specific requirements and specifications.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      <strong style="font-weight: 700; color: #333;">Free Mould Parts:</strong> We provide free mould parts for after-sales service, ensuring that you have a hassle-free experience with our product.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      <strong style="font-weight: 700; color: #333;">Fast Delivery:</strong> With a delivery time of 50 days, you can quickly get your product to market and meet your business needs, as requested by our valued customer.
+    </p>
+  `,
+  specs: []
+},
+// ===== bp-4: Pet Preform Jar Mould Oil Bottle =====
+'bp-4': {
+  title: 'Pet Preform Jar Mould Oil Bottle Preform Mold',
+  breadcrumb: 'BOTTLE MOLD & PREFORM MOLD',
+  image: 'pet-bottle4.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Only focus on preform mold! High quality and high effiency of multi-cavity preform mold. PET mold specify at 2-14/16/24/32/48/64/72/96/144 cavities, reliable PET mold suppliers. 100% satisfied. Factory Direct Sales.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      From design considerations to material selection and manufacturing techniques, every aspect is carefully examined to ensure optimal performance and durability. By mastering the art of PET preform mould excellence, manufacturers can meet the growing demand for superior packaging solutions and gain a competitive edge in the market.
+    </p>
+
+    <!-- Specification Table (2-Column Layout) -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f0f0f0;">
+            <td style="width: 25%; font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Material</td>
+            <td style="width: 25%; padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">S136 or according the customers</td>
+            <td style="width: 25%; font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">No. Of Cavities</td>
+            <td style="width: 25%; padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">According the customers</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Base</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">P20 steel</td>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Guarantee Mould Life</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">2000,000shots</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Injection gate</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">Hot runner</td>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Delivery Time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">45-65working days</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Packing</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">Wooden box</td>
+            <td style="font-weight: 600; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Plastic products sample</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">Provide free</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+// ===== bp-5: 70g Thread 40mm Short Tail =====
+'bp-5': {
+  title: '70g Thread 40mm Short Tail 12 Cavities Pet Preform Mold',
+  breadcrumb: 'BOTTLE MOLD & PREFORM MOLD',
+  image: 'pet-bottle5.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 12px; text-transform: uppercase;">
+      ADVANTAGE:
+    </p>
+
+    <ol style="font-size: 14px; color: #555; line-height: 1.8; padding-left: 20px; margin-bottom: 20px;">
+      <li> Saving 10%-30% cost than others.</li>
+      <li> Direct factory price</li>
+      <li> Life: 3, 000, 000 time</li>
+      <li> 2D and 3D provided</li>
+      <li> Quick T1 time: 25-40 days</li>
+      <li> More than 15 years experience</li>
+    </ol>
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f0f0f0;">
+            <td style="width: 35%; font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Product Name</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">12 Cavities Plastic Pet Preform Mould</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mould Steel</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">P20H,718H,2738H,S136,H13 etc.</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Product Material</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">PP,HDPE,LDPE etc.</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mould Base</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">LKM,ISM,HASCO,DME</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Cavity</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">Single/Multi-cavity</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mould life</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">500,000 ~ 1million shots</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">runner type</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">cold/hot runner</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Delivery time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">30~60day</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+
+// ===== bp-6: 12 Cavities Pet Preform Mould =====
+'bp-6': {
+  title: '12 Cavities Pet Preform Mould',
+  breadcrumb: 'BOTTLE MOLD & PREFORM MOLD',
+  image: 'pet-bottle6.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 20px;">
+      Baoge company warmly welcome friends from home and abroad to establish a wide rang of cooperation, mutual benefit and common development.
+    </p>
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f0f0f0;">
+            <td style="width: 35%; font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Model</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">12cavity pet preform mould</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Preform Neck</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">28mm, 30mm, 38mm</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Preform Weight</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">according to customer's requirement</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Runner</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">Hot runner</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Core Material</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">S136</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Cavtiy Material</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">S136</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Screw Neck Material</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">S136</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Base</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">4CR13 Steel</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Size</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">610*320*500</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Cycle time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">different weight with the different cycle time</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Life</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">3-5millions</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Scope of Application</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">water bottle</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Delivery time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">50-60days</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+// ===== bp-7: 32 Cavities Preform Hot Runner =====
+'bp-7': {
+  title: '32 Cavities Preform Hot Runner Pet Plastic Injection Mold',
+  breadcrumb: 'BOTTLE MOLD & PREFORM MOLD',
+  image: 'pet-bottle7.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px; text-transform: uppercase;">
+      ADVANTAGESOEM
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Plastic Injection 48 Cavity Pet Preform Mould with Hot Runner The PET specialist team has been operating successfully in the industry for decades in Packaging industry.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Highly Flexibilityand Customizability For most of Chinese-known injection machines and blow molding machine.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      For a wide range of neck and weight containers For different price options as structure and material choice For latest market requirements and customer's needs Service Service satisfaction from pre-salesale and after-sale service Innovation Focus on advanced technology and develop state-of-the art containers.
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 16px;">
+      Mold 32-cavity PET Preform Mold Preform Neck 28mm,30mm Preform Weight Customized Runner Hot Runner Core Material S136 Cavity Material S136 Screw Neck Material S136 Mold Base 4CR13 Steel Cycle Time Vary in terms of preform weight Mold Life 5 millions Scope of Application Water bottle Delivery time 60-70 days
+    </p>
+  `,
+  specs: []
+},
+
+// ===== bp-8: 48 Cavity Custom Design =====
+'bp-8': {
+  title: '48 Cavity Custom Design Pet Preform Mould Manufacturer',
+  breadcrumb: 'BOTTLE MOLD & PREFORM MOLD',
+  image: 'pet-bottle8.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 12px;">
+      packaging &amp;delivery
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 12px;">
+      packaging :standard export wooden case
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 12px;">
+      delivery time:shipping in 50days after payment
+    </p>
+
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 20px;">
+      application:preform mold is installed on injection machine and used for producing preform,such as 5gallon preform,28mm pco 1810 mould,1881 preform mould, 38mm 2start preform mould,38mm 3start preform mould,48mm pet preform moulds,PP preform mould,beverage preform mould,water bottle mould,oil bottle preform mould,preform mould with valve gate,preform mould with short tail,preform with long tail,mineral bottle preform mould,edible oil bottle preform mould,3gallon preform mould,5gallon preform mould,preform with different weight,preform mould with 1 to 96cavities.etc.
+    </p>
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f0f0f0;">
+            <td style="width: 40%; font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">name</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">description</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">preform type</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">without injection tail,no need cut</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">runner type</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">hot runner valve gate</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">core,cavity and neck material</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">S136stell(46-50HRC)</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">mould base</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">chrome plated P20(mati-rust)</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">cycle time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">18 to23S</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">off-center control range</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">+/-0.05mm</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">mould structure</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">self lock by each cavity,demoulding automatically</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">mould life</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">5millong shots</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">manufacturing time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">45 to 50days</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">design software</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">PROE,Cimtron,UG,AutoCAD,CAM,UG ect</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Hot runner</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">YUDO,SINO,HUSKY,and other famour brand</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+
+// ===== bp-9: 72 Cavity Plastic Pet Preform =====
+'bp-9': {
+  title: '72 Cavity Plastic Pet Preform Mold Needle',
+  breadcrumb: 'BOTTLE MOLD & PREFORM MOLD',
+  image: 'pet-bottle9.jpg',
+  description: `
+    <p style="font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 20px;">
+      Our company have strong technology strength,completely equipment.we hold advancedmechanical equipment,such as CAD/CAM/CAE computer system,And TaiWan high speednumerical control punch, High speed numerical lathe(6000/min),Japan electric light slowsilk thread cutting etc high precision equipment, have ensured the consistent quality ofhigh-precision moulds.
+    </p>
+
+    <!-- Specification Table -->
+    <div class="table-responsive-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      <table class="spec-table" style="width: 100%; border-collapse: collapse; background: #ffffff; font-size: 13px; min-width: 500px;">
+        <tbody>
+          <tr style="background: #f0f0f0;">
+            <td style="width: 35%; font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Model</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">72 cavity Pet preform water mould</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Preform Neck</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">28mm / 30mm</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Preform Weight</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">13g / 15g.....</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Runner</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">Hot runner</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Core Material</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">S136</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Cavtiy Material</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">S136</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Screw Neck Material</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">S136</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Base</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">4CR13 Steel/P20</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Cycle time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">16s</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Mold Life</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">5millions</td>
+          </tr>
+          <tr style="background: #f0f0f0;">
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Scope of Application</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">water bottle</td>
+          </tr>
+          <tr>
+            <td style="font-weight: 700; padding: 12px 14px; border: 1px solid #e2e8f0; color: #1e293b;">Delivery time</td>
+            <td style="padding: 12px 14px; border: 1px solid #e2e8f0; color: #334155;">60-70days</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `,
+  specs: []
+},
+      // ========== AUXILIARY EQUIPMENTS (6 Products) ==========
+   
+   'aux-1': {
+     title: 'Are compressor',
+     breadcrumb: 'BLOWING MACHINE AUXILIARY EQUIPMENTS',
+     image: 'are-compresser.jpg',
+     description: '',
+     specs: []
+   },
+   'aux-2': {
+     title: 'Screw Air Compressor',
+     breadcrumb: 'BLOWING MACHINE AUXILIARY EQUIPMENTS',
+     image: 'screw-air-cimoressor.jpg',
+     description: '',
+     specs: []
+   },
+   'aux-3': {
+     title: 'Air Tank',
+     breadcrumb: 'BLOWING MACHINE AUXILIARY EQUIPMENTS',
+     image: 'air-tank.jpg',
+     description: '',
+     specs: []
+   },
+   'aux-4': {
+     title: 'Air filter',
+     breadcrumb: 'BLOWING MACHINE AUXILIARY EQUIPMENTS',
+     image: 'air-filter.jpg',
+     description: '',
+     specs: []
+   },
+   'aux-5': {
+     title: 'Chiller',
+     breadcrumb: 'BLOWING MACHINE AUXILIARY EQUIPMENTS',
+     image: 'chiller.jpg',
+     description: '',
+     specs: []
+   },
+   'aux-6': {
+     title: 'Air Dryer',
+     breadcrumb: 'BLOWING MACHINE AUXILIARY EQUIPMENTS',
+     image: 'air-dryer.jpg',
+     description: '',
+     specs: []
+   },
+  };
+
+  // ================= PRODUCT DETAIL RENDER =================
+  const product = productsData[productId];
+  const container = document.getElementById('productContainer');
+
+  if (product) {
+    document.getElementById('breadcrumbTitle').textContent = product.breadcrumb;
+    document.getElementById('heroTitle').textContent = product.breadcrumb;
+
+    let productDetailHTML = '';
+    
+    if (productId.startsWith('aux-')) {
+      productDetailHTML = `
+        <div class="product-main-image">
+          <img src="${product.image}" alt="${product.title}" onerror="this.src='https://via.placeholder.com/600x400/0284c7/ffffff?text=Product+Image'" />
+        </div>
+        <h1 class="product-title">${product.title}</h1>
+      `;
+    } else {
+      let specTableHTML = '';
+      if (!product.description.includes('<table')) {
+        specTableHTML = '<table class="spec-table"><tbody>';
+        product.specs.forEach(row => {
+          specTableHTML += `<tr><td class="label">${row[0]}</td><td>${row[1]}</td></tr>`;
+        });
+        specTableHTML += '</tbody></table>';
+      }
+
+      productDetailHTML = `
+        <div class="product-main-image">
+          <img src="${product.image}" alt="${product.title}" onerror="this.src='https://via.placeholder.com/600x400/0284c7/ffffff?text=Product+Image'" />
+        </div>
+        <h1 class="product-title">${product.title}</h1>
+        <div class="product-description">${product.description}</div>
+        ${specTableHTML}
+      `;
+    }
+
+    let companySectionHTML = '';
+    if (!productId.startsWith('bp-')) {
+      companySectionHTML = `
+        <div class="company-section">
+          <div class="section-banner">COMPANY PROFILE</div>
+          <div class="image-grid">
+            <img src="a-1.jpg" alt="Company Profile" onerror="this.src='https://via.placeholder.com/600x300/1e293b/ffffff?text=Company+Profile'" />
+            <img src="a-2.jpg" alt="Team Work" onerror="this.src='https://via.placeholder.com/600x300/1e293b/ffffff?text=Team+Work'" />
+          </div>
+          <div class="section-banner" style="margin-top: 12px;">PRODUCTION WORKSHOP</div>
+          <div class="image-grid">
+            <img src="a-3.jpg" alt="Workshop" onerror="this.src='https://via.placeholder.com/600x350/0f172a/ffffff?text=Manufacturing+Floor'" />
+         
+          </div>
+
+          
+          </div>
+        </div>
+      `;
+    }
+
+    container.innerHTML = `
+      ${productDetailHTML}
+      ${companySectionHTML}
+
+      <div class="sidebar-widget">
+        <h3 class="widget-title">Our Product Categories</h3>
+        <ul class="widget-list">
+          <li><a href="product-detail1.html?product=1">FULLY AUTOMATICBLOWING MACHINE</a></li>
+          <li><a href="product-detail1.html?product=2">SEMI AUTOMATICBLOWING MACHINE</a></li>
+          <li><a href="product-detail1.html?product=3">BOTTLE MOLD&PREFORM MOLD&CAP MOLD</a></li>
+          <li><a href="product-detail1.html?product=4">BLOWING MACHINE AUXILIARY EQUIPMENTS</a></li>
+          <li><a href="product-detail1.html?product=5">PREFORM&CAP&HANDLE</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3 class="widget-title">Application</h3>
+        <ul class="widget-list">
+          <li><a href="application.html">Drinking Water Bottle</a></li>
+          <li><a href="application.html">Carbonated Beverage Bottle</a></li>
+          <li><a href="application.html">PET Oil Blow Molding Machine</a></li>
+          <li><a href="application.html">Wide Mouth Plastic Bottle</a></li>
+          <li><a href="application.html">Daily Chemistry Bottle</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3 class="widget-title">Product Tags</h3>
+        <div class="tags-cloud">
+          <a href="#" class="tag-item">Plastic blow molding machine manufacture</a>
+          <a href="#" class="tag-item">pet bottle blow molding machine</a>
+          <a href="#" class="tag-item">fully automatic blowing machine</a>
+          <a href="#" class="tag-item">handle automatic blowing machine</a>
+          <a href="#" class="tag-item">semi automatic blow molding machine</a>
+          <a href="#" class="tag-item">jar making machine</a>
+          <a href="#" class="tag-item">bottle molding machine</a>
+          <a href="#" class="tag-item">stretch blow moulding machine</a>
+          <a href="#" class="tag-item">Plastic Blow Molding Machine</a>
+          <a href="#" class="tag-item">bottle making machine</a>
+          <a href="#" class="tag-item">Complete Water Production Line</a>
+          <a href="#" class="tag-item">blow molding machine</a>
+          <a href="#" class="tag-item">blow molding machine price</a>
+          <a href="#" class="tag-item">Blow molding machine factory</a>
+          <a href="#" class="tag-item">Bottle Blowing Machine</a>
+          <a href="#" class="tag-item">PET Blowing Machine</a>
+          <a href="#" class="tag-item">blow moulding machines</a>
+          <a href="#" class="tag-item">PET Bottle Blowing Machine</a>
+          <a href="#" class="tag-item">2 Cavity Manufacturers Suppliers Factory</a>
+          <a href="#" class="tag-item">Automatic Pet Jar Making Machine</a>
+          <a href="#" class="tag-item">10L-20L Plastic Bottle Making Machine</a>
+          <a href="#" class="tag-item">blow molding machine video</a>
+          <a href="#" class="tag-item">Beverage Automatic Blow Molding Machine</a>
+          <a href="#" class="tag-item">PET blowing machine factory</a>
+          <a href="#" class="tag-item">Water Bottle Making Machine</a>
+          <a href="#" class="tag-item">5L Blow molding Machine</a>
+          <a href="#" class="tag-item">pp Bottle Blowing Making</a>
+          <a href="#" class="tag-item">Blow Moulding Machine</a>
+          <a href="#" class="tag-item">4-cavity blow molding machine</a>
+          <a href="#" class="tag-item">blowing machine manufacturing</a>
+          <a href="#" class="tag-item">Automatic Blow Molding Machine</a>
+          <a href="#" class="tag-item">Pet jar automatic blow molding machine</a>
+          <a href="#" class="tag-item">4 cavity pet bottle blowing machine</a>
+          <a href="#" class="tag-item">330ml Bottle Blow Molding Machine</a>
+          <a href="#" class="tag-item">Water Bottle Blowing Machine</a>
+          <a href="#" class="tag-item">5L water bottle blowing machines</a>
+          <a href="#" class="tag-item">Wide mouth bottle blowing machine</a>
+          <a href="#" class="tag-item">50-180 large diameter bottle</a>
+          <a href="#" class="tag-item">5L wide mouth bottle</a>
+          <a href="#" class="tag-item">38 100mm wide mouth bottle</a>
+          <a href="#" class="tag-item">30 2000ml plastic oil bottle</a>
+          <a href="#" class="tag-item">Edible Oil PET Blow Molding Machine</a>
+          <a href="#" class="tag-item">pet stretch blow moulding machine</a>
+          <a href="#" class="tag-item">Bottle Blowing Machine 3L</a>
+        </div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = '<p style="padding: 20px; text-align: center;">Product not found.</p>';
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUA SABA IMPEX PLASTIC MACHINERY</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .bg-dark-sidebar { background-color: #0E1626; }
+
+    /* ================= SIDEBAR ================= */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      display: none;
+    }
+    .sidebar-overlay.active { display: block; }
+    .sidebar {
+      position: fixed;
+      top: 0; left: -300px;
+      width: 300px; height: 100vh;
+      background: #0b1320;
+      color: #fff;
+      z-index: 999;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar.active { left: 0; }
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .sidebar-logo { display: flex; align-items: center; gap: 10px; }
+    .sidebar-brand { font-size: 13px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+    .sidebar-close { color: #fff; font-size: 20px; cursor: pointer; }
+    .sidebar-menu { list-style: none; padding: 10px 0; flex-grow: 1; }
+    .sidebar-menu li { border-bottom: 1px solid #1e293b; }
+    .sidebar-menu a,
+    .menu-item-with-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .sidebar-menu a:hover,
+    .menu-item-with-btn:hover { color: #38bdf8; }
+    .dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px; height: 24px;
+      background: #0284c7;
+      color: #fff;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .dropdown-btn.open {
+      transform: rotate(90deg);
+      background: #ffffff;
+      color: #0284c7;
+    }
+    .product-dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: #070d19;
+    }
+    .product-dropdown.open { max-height: 400px; }
+    .product-dropdown a {
+      padding: 12px 20px 12px 30px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      border-bottom: 1px solid #151f30;
+      text-transform: uppercase;
+    }
+    .sidebar-contact { padding: 16px 20px; border-top: 1px solid #1e293b; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+    .contact-icon {
+      width: 30px; height: 30px;
+      background: #0284c7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .sidebar-social {
+      display: flex;
+      gap: 16px;
+      padding: 16px 20px;
+      border-top: 1px solid #1e293b;
+      font-size: 18px;
+    }
+    .sidebar-social a { color: #cbd5e1; text-decoration: none; }
+    .sidebar-social a:hover { color: #38bdf8; }
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+      background-color: #ffffff;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.06);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-container img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e2e8f0;
+    }
+    .logo-text {
+      font-size: 15px;
+      font-weight: 900;
+      color: #004b93;
+      font-style: italic;
+      line-height: 1.1;
+      letter-spacing: -0.3px;
+    }
+    .menu-btn {
+      cursor: pointer;
+      padding: 6px;
+      border: none;
+      background: transparent;
+      color: #007bff;
+      font-size: 22px;
+    }
+
+    /* ================= HERO SLIDER ================= */
+    .hero-slider {
+      position: relative;
+      width: 100%;
+      height: 750px;
+      overflow: hidden;
+      background: #72C0E8;
+    }
+    .hero-slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #72C0E8;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      display: flex;
+      align-items: center;
+    }
+    .hero-slide.active { opacity: 1; z-index: 1; }
+/* ================= HERO CONTENT ================= */
+.hero-content {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #fff;
+  padding-left: 30px;
+  margin-left: 5%;
+  text-align: left;
+}
+
+/* Dynamic Line (Default: Vertical) */
+.hero-content::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  transition: all 0.6s ease;
+}
+
+/* Jab Slide 2 Active Ho - Line Horizontal */
+.hero-slide:nth-child(2).active .hero-content::before {
+  width: 100%;
+  height: 4px;
+  top: auto;
+  bottom: -50px;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Hero Button */
+.hero-btn {
+  display: inline-block;
+  background: #0284c7;
+  color: #fff;
+  padding: 16px 32px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s;
+  position: relative;
+}
+    .hero-content h1 {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.5;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      letter-spacing: 0.3px;
+    }
+    .hero-btn {
+      display: inline-block;
+      background: #0284c7;
+      color: #fff;
+      padding: 16px 32px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .hero-btn:hover { background: #0369a1; }
+    .hero-dots {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    .hero-dot {
+      width: 14px; height: 14px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .hero-dot.active { background: #fff; transform: scale(1.3); }
+
+    @media (max-width: 1024px) {
+      .hero-slider { height: 650px; }
+      .hero-content h1 { font-size: 28px; }
+    }
+    @media (max-width: 768px) {
+      .hero-slider { height: 600px; }
+      .hero-content h1 { font-size: 22px; margin-bottom: 30px; }
+      .hero-content { margin-left: 3%; padding-left: 20px; }
+      .hero-btn { padding: 14px 24px; font-size: 13px; }
+    }
+
+    /* ================= SERVICES SLIDER ================= */
+    .services-section { padding: 60px 0; background: #f8f9fa; text-align: center; }
+    .services-header { margin-bottom: 40px; }
+    .section-tag {
+      color: #0284c7; font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+    .services-header h2 { font-size: 28px; font-weight: 800; color: #111; margin-top: 8px; }
+    .services-slider-wrapper { overflow: hidden; padding: 0 20px; }
+    .services-track { display: flex; gap: 20px; transition: transform 0.5s ease; }
+    .service-card {
+      flex: 0 0 calc(33.333% - 14px);
+      background: #fff; border-radius: 8px; overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-decoration: none; color: inherit;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .service-card img {
+      width: 100%; height: 200px; object-fit: contain;
+      background: #f8f9fa; padding: 16px;
+    }
+    .service-card h3 { font-size: 15px; font-weight: 700; color: #111; padding: 12px 16px 6px; line-height: 1.3; }
+    .service-card p { font-size: 12px; color: #666; padding: 0 16px 16px; line-height: 1.5; }
+    .slider-arrows { display: flex; justify-content: center; gap: 12px; margin-top: 24px; }
+    .slider-arrows button {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #0284c7; color: #fff; border: none;
+      font-size: 22px; cursor: pointer; transition: background 0.3s;
+    }
+    .slider-arrows button:hover { background: #0369a1; }
+    @media (max-width: 768px) {
+      .service-card { flex: 0 0 calc(100% - 0px); }
+      .services-header h2 { font-size: 20px; }
+    }
+
+    /* ================= NEWS CARDS ================= */
+    .news-card-img {
+      width: 100%; height: 200px;
+      object-fit: cover; object-position: center; display: block;
+    }
+
+    /* ================= HOME VIDEO SECTION ================= */
+    .home-video-section {
+      position: relative;
+      padding: 120px 20px;
+      text-align: center;
+      overflow: hidden;
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .home-video-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.55);
+    }
+    .home-video-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(2, 132, 199, 0.45);
+    }
+    .home-video-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .home-play-btn {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: #fff;
+      color: #0284c7;
+      border: none;
+      font-size: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+      box-shadow: 0 0 0 15px rgba(255,255,255,0.25), 0 0 0 35px rgba(255,255,255,0.15);
+      transition: transform 0.3s;
+    }
+    .home-play-btn:hover { transform: scale(1.08); }
+    .home-video-content h3 {
+      font-size: 32px; font-weight: 800; color: #fff;
+      line-height: 1.4; text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    @media (max-width: 768px) {
+      .home-video-section { padding: 80px 16px; min-height: 450px; }
+      .home-play-btn { width: 80px; height: 80px; font-size: 26px; }
+      .home-video-content h3 { font-size: 22px; }
+    }
+
+    /* ================= VIDEO MODAL ================= */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .video-modal.active { display: flex; }
+    .video-modal-content {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .video-modal-content video {
+      width: 100%; height: auto; max-height: 75vh; display: block;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: rgba(255,255,255,0.25);
+      color: #fff;
+      border: none;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s;
+    }
+    .video-modal-close:hover { background: rgba(255,255,255,0.4); }
+
+    /* ================= FOOTER ================= */
+    .footer {
+      background-color: #0b101d; color: #cbd5e1;
+      text-align: center; padding: 30px 16px; font-size: 12px;
+    }
+    .footer-logo {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-bottom: 12px;
+    }
+    .footer-logo img {
+      width: 42px; height: 42px;
+      border-radius: 50%; object-fit: cover; border: 2px solid #fff;
+    }
+    .footer-logo span { font-size: 16px; font-weight: 900; color: #fff; }
+  </style>
+</head>
+<body class="font-sans text-gray-700 bg-white antialiased">
+
+<!-- ================= SIDEBAR OVERLAY ================= -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- ================= SIDEBAR MENU ================= -->
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <img src="logo-icon.png" alt="Dua Saba Impex Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #fff;">
+      <span class="sidebar-brand">DUA SABA IMPEX</span>
+    </div>
+    <div class="sidebar-close" onclick="toggleSidebar()">✕</div>
+  </div>
+
+  <ul class="sidebar-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About us</a></li>
+    <li class="has-dropdown">
+      <div class="menu-item-with-btn" onclick="toggleProductDropdown()">
+        <span>Product</span>
+        <span class="dropdown-btn">›</span>
+      </div>
+        <div id="productDropdown" class="product-dropdown">
+        <a href="product1.html">FULLY AUTOMATIC BLOWING MACHINE</a>
+        <a href="semi-automatic-blowing-macine.html">SEMI AUTOMATIC BLOWING MACHINE</a>
+        <a href="Pet-bottle-.html">BOTTLE MOLD & PREFORM MOLD & CAP MOLD</a>
+        <a href="pet-blowing-axillary-equipments.html">BLOWING MACHINE AUXILIARY EQUIPMENTS</a>
+        <a href="product-detail1.html?product=5">PREFORM & CAP & HANDLE</a>
+      </div>
+    </li>
+    <li><a href="application.html">Application</a></li>
+    <li><a href="video.html">Video</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="sidebar-contact">
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+      <span>sabaplastic007@yahoo.com</span>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+      <span>+92 300 9228618</span>
+    </div>
+  </div>
+
+  <div class="sidebar-social">
+    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+  </div>
+</div>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <a href="index.html" class="logo-container">
+    <img src="logo-icon.png" alt="Dua Saba Impex Logo">
+    <span class="logo-text">DUA SABA IMPEX<br>PLASTIC MACHINERY</span>
+  </a>
+  <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</header>
+
+<!-- ================= HERO SLIDER ================= -->
+<section class="hero-slider">
+  <div class="hero-slide active">
+    <div class="hero-content">
+      <h1>Quality Is Our Company Culture.<br>One Time Cooperation, Lifetime Service.<br>12 Years Of Export Experience And Have Customer More Than 100 Cities</h1>
+      <a href="about.html" class="hero-btn">DESCRIBE MORE →</a>
+    </div>
+  </div>
+
+  <div class="hero-slide">
+    <div class="hero-content">
+      <h1>Blow Molding Machines Provider<br>Your Blow Molding Machine Provider Expert</h1>
+      <a href="semi-automatic-blowing-machine.html" class="hero-btn">SEMI AUTOMATIC BLOWING MACHINE →</a>
+    </div>
+  </div>
+
+  <div class="hero-dots">
+    <span class="hero-dot active" onclick="goToHeroSlide(0)"></span>
+    <span class="hero-dot" onclick="goToHeroSlide(1)"></span>
+  </div>
+</section>
+
+<!-- ================= PRODUCT CLASSIFICATION ================= -->
+<section class="py-12 px-4 max-w-6xl mx-auto text-center">
+  <div class="flex items-center justify-center space-x-2 text-sky-500 text-xs font-bold uppercase tracking-widest mb-1">
+    <span>—&bull;—</span>
+    <span>DUA SABA IMPEX CO., LTD.</span>
+    <span>—&bull;—</span>
+  </div>
+  <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-8">Product classification</h2>
+
+  <div class="w-full max-w-5xl mx-auto">
+    <img src="a.jpg" alt="Product Classification" class="w-full h-auto object-contain shadow-sm rounded">
+  </div>
+</section>
+
+<!-- ================= ABOUT US ================= -->
+<section class="py-12 bg-gray-50 px-4">
+  <div class="max-w-5xl mx-auto space-y-8">
+    <div class="relative rounded overflow-hidden shadow-md">
+      <img src="about-v3-img1.jpg" alt="Factory Workshop" class="w-full h-64 md:h-96 object-cover">
+      <div class="absolute top-0 right-0 bg-sky-500 text-white p-6 md:p-8 max-w-xs shadow-lg">
+        <p class="text-4xl md:text-5xl font-extrabold">12+</p>
+        <p class="text-lg font-semibold mt-1">Year Experience</p>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="text-sky-500 text-xs font-bold uppercase tracking-wider flex items-center space-x-1">
+        <span>—&bull;</span>
+        <span>ABOUT US</span>
+      </div>
+      <h3 class="text-xl md:text-2xl font-bold text-gray-900 leading-snug">
+        DUA SABA IMPEX, Your Professional Blow Molding Machine & Preform Mold Provider in Pakistan
+      </h3>
+      <p class="text-sm leading-relaxed text-gray-600 text-justify">
+        DUA SABA IMPEX PLASTIC MACHINERY is founded in 2012, located in Karachi city, Pakistan. We are professional Provider of PET bottle blowing machines, plastic molds, etc... Our machine are suitable for 5ml-25L plastic bottles, water bottles, carbonated beverage bottles, oil bottles, cosmetics bottles. We can equip machine from 1-12 cavity, output from hundreds bottles to 10000 bottles/hour, also provide full set of production system from preform production, bottle blowing, filling to final packaging. Our products has covered all over Pakistan and exported to more than 100 cities, including Karachi, Islamabad, Lahore, Quetta, Peshawar, Faisalabad, Gujranwala etc. We'd like to provide high quality solution to clients with our enthusiasm and rich experience. We sincerely hope to establish business relationship with friends all over the world.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES SLIDER ================= -->
+<section class="services-section">
+  <div class="services-header">
+    <span class="section-tag">— • — SERVICES — • —</span>
+    <h2>We provide blowing equipment & supporting services</h2>
+  </div>
+
+  <div class="services-slider-wrapper">
+    <div class="services-track" id="servicesTrack">
+
+      <a href="product-detail1.html?product=3" class="service-card">
+        <img src="product3.jpg" alt="BG2000 High Speed">
+        <h3>BG2000 High Speed Fully Automatic Water Bottle B...</h3>
+        <p>Suitable for all shapes of PET plastic bottles, widely used to produce the carbonated bottle, mineral water...</p>
+      </a>
+
+      <a href="product-detail1.html?product=1" class="service-card">
+        <img src="daily-chemistry2.jpg" alt="Low Price Good Quality">
+        <h3>Low Price Good Quality Water Bottle Small Plastic...</h3>
+        <p>High positioning accuracy, fast speed and stability, good reliability. Gas circuit design will divide...</p>
+      </a>
+
+      <a href="product-detail1.html?product=4" class="service-card">
+        <img src="daily-chemistry1.jpg" alt="BG-2000 2Cavities">
+        <h3>BG-2000 2Cavities Fully Automatic Plastic Spring ...</h3>
+        <p>PET plastic containers and bottles in all shapes. It is widely used to produce the carbonated bottle...</p>
+      </a>
+
+      <a href="product-detail1.html?product=5" class="service-card">
+        <img src="product6.jpg" alt="Fully Automatic PET">
+        <h3>Fully Automatic PET plastic Blowing Machine Stret...</h3>
+        <p>PET blowing machine for 2l linear bottle blowing machines are used in the production of PET water...</p>
+      </a>
+
+      <a href="product-detail1.html?product=1" class="service-card">
+        <img src="daily-chemistry2.jpg" alt="Cheap Price 4 Cavities">
+        <h3>Cheap Price 4 Cavities Full Automatic Pure Water ...</h3>
+        <p>1500 bottles per hour (750 ml plastic bottles), max volume 2L plastic bottle, suitable for blowing...</p>
+      </a>
+
+      <a href="product-detail1.html?product=2" class="service-card">
+        <img src="carbonated-detail1.jpg" alt="China Factory High Speed">
+        <h3>China Factory High Speed Lowest Price 6 Cavities ...</h3>
+        <p>6 Cavity Full Automatic Blow Moulding Machine, with production capacity at 6,000~7,000 bottles per hour...</p>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="slider-arrows">
+    <button onclick="scrollServices(-1)">‹</button>
+    <button onclick="scrollServices(1)">›</button>
+  </div>
+</section>
+
+<!-- ================= HOME VIDEO SECTION ================= -->
+<section class="home-video-section">
+  <div class="home-video-bg" style="background-image: url('about-v3-img1.jpg');"></div>
+  <div class="home-video-overlay"></div>
+
+  <div class="home-video-content">
+    <button class="home-play-btn" onclick="openHomeVideo()">
+      <i class="fa-solid fa-play"></i>
+    </button>
+    <h3>Please check out our video to learn more about us</h3>
+  </div>
+</section>
+
+<!-- ================= VIDEO MODAL ================= -->
+<div id="homeVideoModal" class="video-modal" onclick="closeHomeVideo()">
+  <div class="video-modal-content" onclick="event.stopPropagation();">
+    <button class="video-modal-close" onclick="closeHomeVideo()">✕</button>
+    <video id="homeVideoPlayer" controls preload="metadata">
+      <source src="home-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<!-- ================= BLOG & NEWS ================= -->
+<section class="py-12 px-4 max-w-6xl mx-auto text-center">
+  <div class="text-sky-500 text-xs font-bold uppercase tracking-widest mb-1 flex items-center justify-center space-x-2">
+    <span>—&bull;—</span>
+    <span>BLOG & NEWS</span>
+    <span>—&bull;—</span>
+  </div>
+  <h2 class="text-2xl font-extrabold text-gray-900 mb-8">Latest Blog & News</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+
+    <div class="bg-white border rounded shadow-sm overflow-hidden flex flex-col justify-between">
+      <div class="relative">
+        <img src="202412301043325965.jpg" alt="Hot Selling Items" class="news-card-img" onerror="this.src='https://via.placeholder.com/400x200/004b93/ffffff?text=News+1'">
+        <div class="absolute bottom-2 left-2 bg-sky-500 text-white text-xs font-bold px-2 py-1 rounded shadow">
+          30 <br><span class="font-normal text-[10px]">2024-12</span>
+        </div>
+      </div>
+      <div class="p-4 space-y-2 flex-grow">
+        <div class="flex items-center space-x-4 text-xs text-sky-500">
+          <span><i class="fa-regular fa-eye mr-1"></i> Views</span>
+          <span><i class="fa-regular fa-user mr-1"></i> Admin</span>
+        </div>
+        <h4 class="font-bold text-gray-800 text-sm">Cheap China Quality Mineral Water Bottle Blow Molding Machine</h4>
+        <p class="text-xs text-gray-500">DUA SABA IMPEX can produce various shapes and sizes of plastic bottles and contain...</p>
+      </div>
+      <div class="px-4 pb-4">
+        <a href="news-detail.html?post=1" class="text-xs font-bold text-sky-500 hover:underline">READ MORE &rarr;</a>
+      </div>
+    </div>
+
+    <div class="bg-white border rounded shadow-sm overflow-hidden flex flex-col justify-between">
+      <div class="relative">
+        <img src="nopic.jpg" alt="Bottles Display" class="news-card-img" onerror="this.src='https://via.placeholder.com/400x200/004b93/ffffff?text=News+2'">
+        <div class="absolute bottom-2 left-2 bg-sky-500 text-white text-xs font-bold px-2 py-1 rounded shadow">
+          27 <br><span class="font-normal text-[10px]">2024-12</span>
+        </div>
+      </div>
+      <div class="p-4 space-y-2 flex-grow">
+        <div class="flex items-center space-x-4 text-xs text-sky-500">
+          <span><i class="fa-regular fa-eye mr-1"></i> Views</span>
+          <span><i class="fa-regular fa-user mr-1"></i> Admin</span>
+        </div>
+        <h4 class="font-bold text-gray-800 text-sm">2 cavity 2L 5L full automatic water bottle blowing machines</h4>
+        <p class="text-xs text-gray-500">5L blow molding machine adopts human-computer interface to control the whole work...</p>
+      </div>
+      <div class="px-4 pb-4">
+        <a href="news-detail.html?post=2" class="text-xs font-bold text-sky-500 hover:underline">READ MORE &rarr;</a>
+      </div>
+    </div>
+
+    <div class="bg-white border rounded shadow-sm overflow-hidden flex flex-col justify-between">
+      <div class="relative">
+        <img src="image.jpg" alt="Production Line" class="news-card-img" onerror="this.src='https://via.placeholder.com/400x200/004b93/ffffff?text=News+3'">
+        <div class="absolute bottom-2 left-2 bg-sky-500 text-white text-xs font-bold px-2 py-1 rounded shadow">
+          27 <br><span class="font-normal text-[10px]">2024-12</span>
+        </div>
+      </div>
+      <div class="p-4 space-y-2 flex-grow">
+        <div class="flex items-center space-x-4 text-xs text-sky-500">
+          <span><i class="fa-regular fa-eye mr-1"></i> Views</span>
+          <span><i class="fa-regular fa-user mr-1"></i> Admin</span>
+        </div>
+        <h4 class="font-bold text-gray-800 text-sm">PET Bottle Blowing Machines - High-Speed & Efficient</h4>
+        <p class="text-xs text-gray-500">1.How to operate the bottle blowing machine?The bottle blowing machine is very ea...</p>
+      </div>
+      <div class="px-4 pb-4">
+        <a href="news-detail.html?post=3" class="text-xs font-bold text-sky-500 hover:underline">READ MORE &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= CO-FOUNDER SECTION ================= -->
+<section class="py-16 bg-gray-50 px-4 text-center">
+  <div class="text-sky-500 text-xs font-bold uppercase tracking-widest mb-1 flex items-center justify-center space-x-2">
+    <span>—&bull;—</span>
+    <span>CO FOUNDER OF DUA SABA IMPEX PLASTIC MACHINERY</span>
+    <span>—&bull;—</span>
+  </div>
+  <h2 class="text-2xl font-extrabold text-gray-900 mb-12"></h2>
+
+  <div class="flex justify-center items-center">
+    <div class="bg-white border-2 border-sky-400 rounded-lg overflow-hidden shadow-lg max-w-xs w-full">
+      <img src="ceo.jpg" alt="Danish Saba" class="w-full h-72 object-cover bg-gray-100" onerror="this.src='https://via.placeholder.com/300x400/004b93/ffffff?text=Danish+Saba'">
+      <div class="bg-sky-500 text-white p-5 space-y-2">
+        <h4 class="font-bold text-lg">Danish Saba</h4>
+        <p class="text-xs underline break-all">danishsaba20@gmail.com</p>
+        <div class="flex items-center justify-center space-x-1 text-xs">
+          <i class="fa-solid fa-phone"></i>
+          <span>+92300 9228618</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-logo">
+    <img src="logo-icon.png" alt="Dua Saba Impex Logo">
+    <span>DUA SABA IMPEX PLASTIC MACHINERY</span>
+  </div>
+  <p>Copyright@ 2024 Dua Saba Impex Plastic Machinery. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // ================= SIDEBAR =================
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+
+  function toggleProductDropdown() {
+    const dropdown = document.getElementById('productDropdown');
+    const btn = document.querySelector('.dropdown-btn');
+    dropdown.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
+
+
+  // ================= HERO SLIDER =================
+  let currentHeroSlide = 0;
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroDots = document.querySelectorAll('.hero-dot');
+
+  function showHeroSlide(index) {
+    heroSlides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (heroDots[i]) heroDots[i].classList.remove('active');
+    });
+    heroSlides[index].classList.add('active');
+    if (heroDots[index]) heroDots[index].classList.add('active');
+    currentHeroSlide = index;
+  }
+
+  function nextHeroSlide() {
+    const nextIndex = (currentHeroSlide + 1) % heroSlides.length;
+    showHeroSlide(nextIndex);
+  }
+
+  function goToHeroSlide(index) {
+    showHeroSlide(index);
+  }
+
+  setInterval(nextHeroSlide, 5000);
+function showHeroSlide(index) {
+  heroSlides.forEach((slide, i) => {
+    slide.classList.remove('active');
+    if (heroDots[i]) heroDots[i].classList.remove('active');
+  });
+  heroSlides[index].classList.add('active');
+  if (heroDots[index]) heroDots[index].classList.add('active');
+  currentHeroSlide = index;
+  
+  // Dynamic Line Direction
+  const heroContent = heroSlides[index].querySelector('.hero-content');
+  if (index === 0) {
+    // Vertical Line
+    heroContent.style.setProperty('--line-width', '4px');
+    heroContent.style.setProperty('--line-height', '100%');
+    heroContent.style.setProperty('--line-top', '0');
+    heroContent.style.setProperty('--line-bottom', 'auto');
+  } else {
+    // Horizontal Line
+    heroContent.style.setProperty('--line-width', '100%');
+    heroContent.style.setProperty('--line-height', '4px');
+    heroContent.style.setProperty('--line-top', 'auto');
+    heroContent.style.setProperty('--line-bottom', '-20px');
+  }
+}
+  // ================= SERVICES SLIDER =================
+  let servicesOffset = 0;
+  const servicesTrack = document.getElementById('servicesTrack');
+  const totalServiceCards = document.querySelectorAll('.service-card').length;
+
+  function scrollServices(direction) {
+    const cardWidth = document.querySelector('.service-card').offsetWidth + 20;
+    const maxOffset = (totalServiceCards - 3) * cardWidth;
+
+    servicesOffset += direction * cardWidth;
+
+    if (servicesOffset < 0) servicesOffset = 0;
+    if (servicesOffset > maxOffset) servicesOffset = maxOffset;
+
+    servicesTrack.style.transform = `translateX(-${servicesOffset}px)`;
+  }
+
+  let autoScrollTimer = setInterval(() => {
+    const cardWidth = document.querySelector('.service-card').offsetWidth + 20;
+    const maxOffset = (totalServiceCards - 3) * cardWidth;
+
+    servicesOffset += cardWidth;
+    if (servicesOffset > maxOffset) servicesOffset = 0;
+
+    servicesTrack.style.transform = `translateX(-${servicesOffset}px)`;
+  }, 3000);
+
+  servicesTrack.addEventListener('mouseenter', () => clearInterval(autoScrollTimer));
+  servicesTrack.addEventListener('mouseleave', () => {
+    autoScrollTimer = setInterval(() => {
+      const cardWidth = document.querySelector('.service-card').offsetWidth + 20;
+      const maxOffset = (totalServiceCards - 3) * cardWidth;
+
+      servicesOffset += cardWidth;
+      if (servicesOffset > maxOffset) servicesOffset = 0;
+
+      servicesTrack.style.transform = `translateX(-${servicesOffset}px)`;
+    }, 3000);
+  });
+
+  // ================= HOME VIDEO =================
+  function openHomeVideo() {
+    const modal = document.getElementById('homeVideoModal');
+    const video = document.getElementById('homeVideoPlayer');
+    modal.classList.add('active');
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(e => console.log('Video autoplay blocked:', e));
+    }
+  }
+
+  function closeHomeVideo() {
+    const modal = document.getElementById('homeVideoModal');
+    const video = document.getElementById('homeVideoPlayer');
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    modal.classList.remove('active');
+  }
+</script>
+
+</body>
+</html>

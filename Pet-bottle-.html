@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bottle Mold & Preform Mold - Baoge Machinery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-blue: #004b93;
+      --active-blue: #00468c;
+      --light-blue: #007bff;
+      --bg-cream: #f6f3ee;
+      --bg-page: #f5f5f5;
+      --text-dark: #222222;
+      --text-muted: #555555;
+      --border-color: #e2e2e2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+
+
+/* ================= SIDEBAR ================= */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  display: none;
+}
+.sidebar-overlay.active {
+  display: block;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100vh;
+  background: #0b1320;
+  color: #fff;
+  z-index: 999;
+  transition: left 0.3s ease;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar.active {
+  left: 0;
+}
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #1e293b;
+}
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar-brand {
+  font-size: 13px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+.sidebar-close {
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.sidebar-menu {
+  list-style: none;
+  padding: 10px 0;
+  flex-grow: 1;
+}
+.sidebar-menu li {
+  border-bottom: 1px solid #1e293b;
+}
+.sidebar-menu a,
+.menu-item-with-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.sidebar-menu a:hover,
+.menu-item-with-btn:hover {
+  color: #38bdf8;
+}
+.dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #0284c7;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+.dropdown-btn.open {
+  transform: rotate(90deg);
+  background: #ffffff;   /* Open hone par white background */
+  color: #0284c7;        /* Open hone par blue icon */
+}
+.product-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #070d19;
+}
+.product-dropdown.open {
+  max-height: 400px;
+}
+.product-dropdown a {
+  padding: 12px 20px 12px 30px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  border-bottom: 1px solid #151f30;
+  text-transform: uppercase;
+}
+.sidebar-contact {
+  padding: 16px 20px;
+  border-top: 1px solid #1e293b;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+.contact-icon {
+  width: 30px;
+  height: 30px;
+  background: #0284c7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.sidebar-social {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+  border-top: 1px solid #1e293b;
+  font-size: 18px;
+}
+.sidebar-social a {
+  color: #cbd5e1;
+  text-decoration: none;
+}
+.sidebar-social a:hover {
+  color: #38bdf8;
+}
+    /* Navbar with Drop Shadow */
+    .navbar {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Shadow beneath header */
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-symbol {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #f37021 40%, #004b93 100%);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      display: inline-block;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--primary-blue);
+      letter-spacing: -0.5px;
+      font-style: italic;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    /* Hero Banner Overlay */
+.hero-banner {
+  position: relative;
+background: linear-gradient(rgba(0, 75, 147, 0.78), rgba(0, 30, 70, 0.88)),
+url('hero-section.jpg') center/cover no-repeat;
+  color: #ffffff;
+  padding: 40px 20px 30px 20px;
+  min-height: 250px;       /* <-- Mobile ki height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .hero-banner {
+    min-height: 350px;      /* <-- Tablet ki height */
+    padding: 60px 40px 50px 40px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .hero-banner {
+    min-height: 450px;      /* <-- Desktop ki height */
+    padding: 80px 60px 70px 60px;
+  }
+}
+
+    .hero-title {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 25px;
+      max-width: 90%;
+    }
+
+    .breadcrumb {
+      font-size: 13px;
+      color: #ffffff;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .breadcrumb span.label {
+      opacity: 0.9;
+    }
+
+    .breadcrumb a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .breadcrumb .separator {
+      margin: 0 2px;
+    }
+
+    /* Dropdown Category Buttons */
+    .category-container {
+      padding: 15px 15px 5px 15px;
+    }
+
+    .category-btn {
+      width: 100%;
+      background-color: var(--bg-cream);
+      color: #333333;
+      text-align: left;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      border: 1px solid #e8e4dc;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: block;
+    }
+
+    .category-btn.active {
+      background-color: var(--active-blue);
+      color: #ffffff;
+      border-color: var(--active-blue);
+    }
+
+    /* Content Area */
+    .content-box {
+      background-color: var(--bg-cream);
+      margin: 10px 15px 20px 15px;
+      padding: 20px 15px;
+      border-radius: 2px;
+    }
+
+    .content-title {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 15px;
+      color: #111111;
+    }
+
+    .content-description {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .content-description p {
+      margin-bottom: 12px;
+    }
+
+    /* Side Go Back Top Label */
+    .go-back-top {
+      position: fixed;
+      right: 10px;
+      bottom: 80px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 10px;
+      font-weight: bold;
+      color: #007bff;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 90;
+      cursor: pointer;
+    }
+
+    .go-back-top::before {
+      content: '';
+      width: 12px;
+      height: 2px;
+      background-color: #007bff;
+    }
+
+    /* Product Cards with Shadows */
+    .product-list {
+      padding: 0 15px;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08); /* Card Shadow */
+      border: 1px solid var(--border-color);
+    }
+
+    .product-img-wrapper {
+      width: 100%;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background-color: #ffffff;
+      cursor: pointer;
+    }
+
+    .product-img-wrapper img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.2s ease;
+    }
+
+    .product-img-wrapper img:hover {
+      transform: scale(1.03);
+    }
+
+    .product-info {
+      padding: 15px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .product-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Image Preview Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: #ffffff;
+      padding: 8px;
+      border: 4px solid var(--light-blue);
+      border-radius: 4px;
+      max-width: 90%;
+      max-height: 80%;
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #080e18;
+      color: #ffffff;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 12px;
+      margin-top: 30px;
+    }
+    
+    
+    /* ================= DESKTOP RESPONSIVE ================= */
+@media (min-width: 768px) {
+  /* Container ko center karein aur max-width dein */
+  .navbar,
+  .hero-banner,
+  .category-container,
+  .content-box,
+  .product-list,
+  .footer {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Hero Banner */
+  .hero-banner {
+    padding: 60px 40px 40px 40px;
+    border-radius: 0 0 12px 12px;
+  }
+  .hero-title {
+    font-size: 32px;
+    max-width: 70%;
+  }
+
+  /* Category Buttons - 2 columns */
+  .category-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 30px 40px 10px 40px;
+  }
+  .category-btn {
+    margin-bottom: 0;
+    padding: 14px 18px;
+    font-size: 13px;
+  }
+
+  /* Content Box */
+  .content-box {
+    margin: 20px 40px 30px 40px;
+    padding: 30px 40px;
+    border-radius: 8px;
+  }
+  .content-title {
+    font-size: 24px;
+  }
+  .content-description {
+    font-size: 15px;
+  }
+
+  /* Product List - Grid with 2 columns */
+  .product-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 0 40px;
+  }
+  .product-card {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .product-img-wrapper {
+    height: 280px;
+  }
+  .product-title {
+    font-size: 16px;
+  }
+  .product-desc {
+    font-size: 14px;
+  }
+}
+
+/* ================= LARGE DESKTOP ================= */
+@media (min-width: 1024px) {
+  .product-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+  </style>
+</head>
+<body>
+
+<!-- ================= SIDEBAR OVERLAY ================= -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- ================= SIDEBAR MENU ================= -->
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <img src="logo-icon.png" alt="Dua Saba Impex Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #fff;">
+      <span class="sidebar-brand">DUA SABA IMPEX</span>
+    </div>
+    <div class="sidebar-close" onclick="toggleSidebar()">✕</div>
+  </div>
+  
+  <ul class="sidebar-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About us</a></li>
+    <li class="has-dropdown">
+      <div class="menu-item-with-btn" onclick="toggleProductDropdown()">
+        <span>Product</span>
+        <span class="dropdown-btn">›</span>
+      </div>
+         <div id="productDropdown" class="product-dropdown">
+        <a href="product1.html">FULLY AUTOMATIC BLOWING MACHINE</a>
+        <a href="semi-automatic-blowing-macine.html">SEMI AUTOMATIC BLOWING MACHINE</a>
+        <a href="Pet-bottle-.html">BOTTLE MOLD & PREFORM MOLD & CAP MOLD</a>
+        <a href="pet-blowing-axillary-equipments.html">BLOWING MACHINE AUXILIARY EQUIPMENTS</a>
+        <a href="product-detail1.html?product=5">PREFORM & CAP & HANDLE</a>
+      </div>
+    </li>
+    <li><a href="application.html">Application</a></li>
+    <li><a href="video.html">Video</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  
+  <div class="sidebar-contact">
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+      <span>sabaplastic007@yahoo.com</span>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+      <span>+92 300 9228618</span>
+    </div>
+  </div>
+  
+  <div class="sidebar-social">
+    <a href="#">🐦</a>
+    <a href="#">📘</a>
+    <a href="#">📌</a>
+    <a href="#">📷</a>
+  </div>
+</div>
+  <!-- Top Navigation Bar -->
+<header class="w-full bg-white shadow-sm sticky top-0 z-40 border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+    
+    <!-- Logo + Company Name -->
+    <a href="#" class="flex items-center space-x-3">
+      <img 
+        src="logo-icon.png" 
+        alt="DUA SABA Impex Logo" 
+        class="h-12 sm:h-14 w-auto object-contain"
+      >
+      <span class="text-xl sm:text-2xl font-extrabold italic tracking-wider text-blue-900">
+        DUA SABA IMPEX PLASTIC MACHINERY
+      </span>
+    </a>
+
+    <!-- Mobile Hamburger Button -->
+   <button id="openNav" onclick="toggleSidebar()" class="text-2xl text-blue-500 focus:outline-none">
+  <i class="fa-solid fa-bars"></i>
+</button>
+
+  </div>
+</header>
+      
+
+  <!-- Hero Header Banner -->
+  <section class="hero-banner">
+    <h1 class="hero-title">Pet Preform Mould Manufacturer</h1>
+    <div class="breadcrumb">
+      <span class="label">Your Location:</span>
+      <a href="#">Home</a>
+      <span class="separator">&raquo;</span>
+      <a href="#">Product</a>
+      <span class="separator">&raquo;</span>
+      <span>BOTTLE MOLD&amp;PREFORM MOLD&amp;CAP MOLD</span>
+    </div>
+  </section>
+
+  <!-- Category Selection Buttons -->
+  <section class="category-container">
+    <button class="category-btn">FULLY AUTOMATICBLOWING MACHINE</button>
+    <button class="category-btn">SEMI AUTOMATICBLOWING MACHINE</button>
+    <button class="category-btn active">BOTTLE MOLD&amp;PREFORM MOLD&amp;CAP MOLD</button>
+    <button class="category-btn">BLOWING MACHINE AUXILIARY EQUIPMENTS</button>
+    <button class="category-btn">PREFORM&amp;CAP&amp;HANDLE</button>
+  </section>
+
+  <!-- Text Description Block -->
+  <section class="content-box">
+    <h2 class="content-title">BOTTLE MOLD&amp;PREFORM MOLD&amp;CAP MOLD</h2>
+    <div class="content-description">
+      <p>For extensive manufacturing experience, BAOGE has established itself as a trusted source for durable and engineered PET preform molds. Our team leverages modern precision technologies paired with high-grade raw materials to engineer cost-effective mold systems.</p>
+      <p>We maintain high standards across local and international partnerships through dedicated quality assurance and production innovation designed to optimize performance across high-cavity environments.</p>
+    </div>
+  </section>
+
+  <!-- Vertical Scroll Side Label -->
+  <div class="go-back-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+    GO BACK TOP
+  </div>
+
+  <!-- Product Item Listings -->
+  <section class="product-list">
+    
+    <!-- Item 1 -->
+    <div class="product-card">
+      <div class="product-img-wrapper" onclick="openModal(this)">
+        <img src="pet-bottle1.jpg" alt="High precision Jar preform mold">
+      </div>
+      <div class="product-info">
+  <a href="product-detail1.html?product=bp-1" class="product-title">High precision 8cavity 12cavity 16cavity 24cavity wide mouth Jar preform mold</a>
+  <p class="product-desc">Our range of products include pet jar mould, jar preform mould and 20 ltr jar preform mould.</p>
+</div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="product-card">
+      <div class="product-img-wrapper" onclick="openModal(this)">
+        <img src="pet-bottle2.jpg" alt="24 Cavities Pet Jar Mould">
+      </div>
+<div class="product-info">
+  <a href="product-detail1.html?product=bp-1" class="product-title">High precision 8cavity 12cavity 16cavity 24cavity wide mouth Jar preform mold</a>
+  <p class="product-desc">Our range of products include pet jar mould, jar preform mould and 20 ltr jar preform mould.</p>
+</div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="product-card">
+      <div class="product-img-wrapper" onclick="openModal(this)">
+        <img src="pet-bottle3.jpg" alt="6 cavities PET Jar Preform Injection Mold">
+      </div>
+<div class="product-info">
+  <a href="product-detail1.html?product=bp-3" class="product-title">6 cavities PET Jar Preform Injection Mold</a>
+  <p class="product-desc">High-Quality Material: Our 6 cavities Hot Runner Valve Gate PET Jar Preform Injection Mould is made from durable S136 steel, ensuring a long-l...</p>
+</div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="product-card">
+      <div class="product-img-wrapper" onclick="openModal(this)">
+        <img src="pet-bottle4.jpg" alt="Pet Preform Jar Mould Oil Bottle">
+      </div>
+<div class="product-info">
+  <a href="product-detail1.html?product=bp-4" class="product-title">Pet Preform Jar Mould Oil Bottle Preform Mold</a>
+  <p class="product-desc">Only focus on preform mold! High quality and high effiency of multi-cavity preform mold. PET mold specify at 2-14/16/24/32/48/64/72/96/144 cav...</p>
+</div>
+    </div>
+
+    <!-- Item 5 -->
+    <div class="product-card">
+      <div class="product-img-wrapper" onclick="openModal(this)">
+        <img src="pet-bottle5.jpg" alt="70g Thread 40mm Short Tail 12 Cavities">
+      </div>
+<div class="product-info">
+  <a href="product-detail1.html?product=bp-5" class="product-title">70g Thread 40mm Short Tail 12 Cavities Pet Preform Mold</a>
+  <p class="product-desc">Product DescriptionWe offer our clients 12 Cavity PET Preform Moulds that are manufactured using quality raw material procured from the relia...</p>
+</div>
+    </div>
+
+    <!-- Item 6 -->
+    <div class="product-card">
+      <div class="product-img-wrapper" onclick="openModal(this)">
+        <img src="pet-bottle6.jpg" alt="12 Cavities Pet Preform Mould">
+      </div>
+<div class="product-info">
+  <a href="product-detail1.html?product=bp-6" class="product-title">12 Cavities Pet Preform Mould</a>
+  <p class="product-desc">Baoge company warmly welcome friends from home and abroad to establish a wide rang of cooperation, mutual benefit and common development.</p>
+</div>
+    </div>
+    
+    <!-- ===== NEW Item 7: 32 Cavities Preform Hot Runner ===== -->
+<div class="product-card">
+  <div class="product-img-wrapper" onclick="location.href='product-detail1.html?product=bp-7'">
+    <img src="pet-bottle7.jpg" alt="32 Cavities Preform Hot Runner Pet Plastic Injection Mold" onerror="this.src='https://via.placeholder.com/600x400/004b93/ffffff?text=32+Cavities+Mold'">
+  </div>
+  <div class="product-info">
+    <a href="product-detail1.html?product=bp-7" class="product-title">
+      32 Cavities Preform Hot Runner Pet Plastic Injection Mold
+    </a>
+    <p class="product-desc">
+      For a wide range of neck and weight containers,For different price options as structure and material choice For latest market requirements and...
+    </p>
+  </div>
+</div>
+
+<!-- ===== NEW Item 8: 48 Cavity Custom Design ===== -->
+<div class="product-card">
+  <div class="product-img-wrapper" onclick="location.href='product-detail1.html?product=bp-8'">
+    <img src="pet-bottle8.jpg" alt="48 Cavity Custom Design Pet Preform Mould Manufacturer" onerror="this.src='https://via.placeholder.com/600x400/004b93/ffffff?text=48+Cavity+Mold'">
+  </div>
+  <div class="product-info">
+    <a href="product-detail1.html?product=bp-8" class="product-title">
+      48 Cavity Custom Design Pet Preform Mould Manufacturer
+    </a>
+    <p class="product-desc">
+      preform mold is installed on injection machine and used for producing preform,such as 5gallon preform,28mm pco 1810 mould,1881 preform mould, ...
+    </p>
+  </div>
+</div>
+
+<!-- ===== NEW Item 9: 72 Cavity Plastic Pet Preform ===== -->
+<div class="product-card">
+  <div class="product-img-wrapper" onclick="location.href='product-detail1.html?product=bp-9'">
+    <img src="pet-bottle9.jpg" alt="72 Cavity Plastic Pet Preform Mold Needle" onerror="this.src='https://via.placeholder.com/600x400/004b93/ffffff?text=72+Cavity+Mold'">
+  </div>
+  <div class="product-info">
+    <a href="product-detail1.html?product=bp-9" class="product-title">
+      72 Cavity Plastic Pet Preform Mold Needle
+    </a>
+    <p class="product-desc">
+      Our company have strong technology strength,completely equipment.we hold advancedmechanical equipment,such as CAD/CAM/CAE computer system,And ...
+    </p>
+  </div>
+</div>
+
+  </section>
+
+  <!-- Image Onclick Blue Border Modal -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation();">
+      <img id="modalImg" src="" alt="Enlarged View">
+    </div>
+  </div>
+
+<footer class="footer">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px;">
+    <img src="logo-icon.png" alt="Dua Saba Impex Logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #fff;">
+    <span style="font-size: 16px; font-weight: 900; color: #fff;">DUA SABA IMPEX PLASTIC MACHINERY</span>
+  </div>
+  <p>Copyright@ 2024 Dua Saba Impex Plastic Machinery. All Rights Reserved.</p>
+</footer>
+
+  <script>
+  
+  // Sidebar Toggle
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+}
+
+// Product Dropdown Toggle
+function toggleProductDropdown() {
+  const dropdown = document.getElementById('productDropdown');
+  const btn = document.querySelector('.dropdown-btn');
+  dropdown.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+  
+  
+    function openModal(wrapper) {
+      const img = wrapper.querySelector('img');
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      
+      modalImg.src = img.src;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
